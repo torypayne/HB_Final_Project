@@ -1,0 +1,24 @@
+<html>
+	<head>
+		{% extends 'master.html' %}
+	</head>
+	<body>
+	{% block body %}
+        <div class="container">
+            <form class="signin" method="POST">
+                <h2 class="signin-heading">Log In</h2>
+                <ul>
+                {% for message in get_flashed_messages() %}
+                    <li>{{message}} </li>
+                {% endfor %}
+                </ul>
+                <input type="email" class="form-control" placeholder="Username" name="email">
+                <input type="password" class="form-control" placeholder="Password" name="password">
+                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Submit">
+            </form>
+        </div>
+	
+	{% endblock %}
+	<script src="/static/js/jquery-2.1.0.js"></script>
+	</body>
+</html>

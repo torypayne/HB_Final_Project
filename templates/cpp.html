@@ -1,0 +1,20 @@
+<html>
+	<head>
+		{% extends 'master.html' %}
+	</head>
+	<body>
+	{% block body %}
+	<h2>How much is a point worth?<br>
+	<soft>It depends what point you're talking about</soft></h2>
+	<h3>Average Cents Per Point Across Chains</h3>
+	<h5>Hilton: {{chain_cpp["Hilton"]|round(2)}}<br><br>
+	Hyatt: {{chain_cpp["Hyatt"]|round(2)}}<br><br>
+	Marriott: {{chain_cpp["Marriott"]|round(2)}}<br><br>
+	Starwood: {{chain_cpp["Starwood"]|round(2)}}<br><br></h5>
+
+	<p>The value of points is a pretty hotly debated topic in the Flyertalk/Frequent Traveller Community.  It's pretty common knowledge that a Starwood point is worth more than a Hilton point, but how much more? While I definitely subcribe to the school of though that a point is worth however much it's worth to you, I also thought it would be helpful to inject some data into the conversation.</p>
+	<p>The above values show the average redemption rates found by searches on Resor.io.  Since you should generally only redeem points in high value situations (or where you can't afford the cash cost), I'd consider those average rates a good guideline for the lowest rate at which you'd be willing to redeem a point.
+	{% endblock %}
+	<script src="/static/js/jquery-2.1.0.js"></script>
+	</body>
+</html>

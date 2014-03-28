@@ -1,0 +1,99 @@
+body {
+    background-color: #E8E8E8;
+}
+
+img.headimage{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+form.search {
+    width: 450px;
+    margin: 50px auto;
+}
+
+form.search input.form-control {
+    margin-bottom: 5px;
+}
+
+form.search input.btn {
+    margin-top: 15px;
+}
+
+form.signin {
+    width: 450px;
+    margin: 50px auto;
+    padding: 5px
+}
+
+form.signin input.form-control {
+    margin-bottom: 5px;
+}
+
+form.signin input.btn {
+    margin-top: 15px;
+}
+
+form.wall_post {
+    width: 500px;
+    margin: 10px auto;
+}
+form.wall_post input.btn {
+    width: 100px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+div.search-box {
+    background-color: #F8F8F8;
+    margin: 10px auto;
+    width: 500px;
+    padding: 1px;
+    border-radius: 5px;
+    border-color: gray;
+}
+
+h2 {
+    margin: 10px auto;
+    text-align: center;
+    padding: 20px;
+
+}
+
+div#logout {
+    float: right;
+}
+
+form.input[type="radio"] {
+    margin-right: 20px;
+}
+
+#form_ratings {
+    width: 145px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form h3 {
+    width: 170px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.hotel-box{
+    border: 1px solid;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+img.hotelimage{
+    float: right;
+    padding-right: 10px;
+    padding-top: 8px;
+    height: 180;
+}
+
