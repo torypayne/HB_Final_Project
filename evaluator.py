@@ -10,6 +10,8 @@ import config
 DB = None
 CONN = None
 
+print config.HOST config.USER config.PASS config.DB
+
 def connect_to_db():
 	global DB
 	global CONN

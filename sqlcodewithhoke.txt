@@ -3,6 +3,8 @@ mysql://b64cd4ed64d781:eb2052db@us-cdbr-east-05.cleardb.net/heroku_ff4277368662e
 mysql --host=us-cdbr-east-05.cleardb.net --user=b64cd4ed64d781 --password=eb2052db --reconnect heroku_ff4277368662e82 < hotels.sql
 
 
+heroku config:set ENV=prod
+
 SELECT table_schema "DB Name", 
 Round(Sum(data_length + index_length) / 1024 / 1024, 1) "DB Size in MB" 
 FROM   information_schema.tables 
