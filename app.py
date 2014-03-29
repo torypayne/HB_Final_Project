@@ -7,6 +7,7 @@ import evaluator
 
 app = Flask(__name__)
 app.secret_key = "tempsecret"
+# app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://b64cd4ed64d781:eb2052db@us-cdbr-east-05.cleardb.net/heroku_ff4277368662e82?reconnect=true"
 
 @app.route("/")
 def index():

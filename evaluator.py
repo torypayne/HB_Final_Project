@@ -4,6 +4,7 @@ import requests
 import json
 # from pprint import pprint
 import time
+import config
 
 
 DB = None
@@ -12,7 +13,7 @@ CONN = None
 def connect_to_db():
 	global DB
 	global CONN
-	CONN = MySQLdb.connect(host="localhost", user="root", passwd="", db="hotelchains")
+	CONN = MySQLdb.connect(host=config.HOST, user=config.USER, passwd=config.PASS, db=config.DB)
 	DB = CONN.cursor()
 
 

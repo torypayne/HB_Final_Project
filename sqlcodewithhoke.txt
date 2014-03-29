@@ -1,0 +1,45 @@
+mysql://b64cd4ed64d781:eb2052db@us-cdbr-east-05.cleardb.net/heroku_ff4277368662e82?reconnect=true
+
+mysql --host=us-cdbr-east-05.cleardb.net --user=b64cd4ed64d781 --password=eb2052db --reconnect heroku_ff4277368662e82 < hotels.sql
+
+
+SELECT table_schema "DB Name", 
+Round(Sum(data_length + index_length) / 1024 / 1024, 1) "DB Size in MB" 
+FROM   information_schema.tables 
+GROUP  BY table_schema;
+
+SELECT table_name AS "Tables", 
+round(((data_length + index_length) / 1024 / 1024), 2) "Size in MB" 
+FROM information_schema.TABLES 
+WHERE table_schema = "hotelchains"
+ORDER BY (data_length + index_length) DESC; 
+
+SELECT table_name AS "Tables", 
+round(((data_length + index_length) / 1024 / 1024), 2) "Size in MB" 
+FROM information_schema.TABLES 
+WHERE table_schema = "heroku_ff4277368662e82"
+ORDER BY (data_length + index_length) DESC; 
+
+
+mysqldump -u root -p hotelchains CuratedHotels CPP_Values Users RegionCodes > hotels.sql
+
+
+CuratedHotels
+CPP_Values
+Users
+RegionCodes
+
+
+| Tables        | Size in MB |
++---------------+------------+
+| eanhotellist  |      33.56 |
+| CuratedHotels |       2.52 |
+| regrates      |       1.52 |
+| CPP_Values    |       0.06 |
+| HotelChains   |       0.06 |
+| regcodeavg    |       0.02 |
+| ratetesting   |       0.02 |
+| Users         |       0.02 |
+| RegionCodes   |       0.02 |
++---------------+------------+
+9 rows in set (0.00 sec)
