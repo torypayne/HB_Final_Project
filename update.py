@@ -40,6 +40,19 @@ for row in rows:
 
 print B_W_Dict
 
-f = open('bestandworst.json', 'w')
+j = open('bestandworst.json', 'w')
 
-f.write(json.dumps(B_W_Dict))
+j.write(json.dumps(B_W_Dict))
+
+Avg_CPP_Dict = {}
+Avg_CPP_Dict = evaluator.find_average_cpp()
+
+f = open("avgcpp.py", "w")
+
+for key,value in Avg_CPP_Dict.iteritems():
+	line = key+"="+str(value)+"\n"
+	print line
+	f.write(line)
+
+f.close()
+
