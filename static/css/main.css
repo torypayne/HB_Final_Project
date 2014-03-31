@@ -8,8 +8,15 @@ img.headimage{
     width: 100%;
 }
 
+img.best-worst-image{
+    width: 225px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
 form.search {
-    width: 450px;
+    width: 400px;
     margin: 50px auto;
 }
 
@@ -53,8 +60,30 @@ div.search-box {
     width: 500px;
     padding: 1px;
     border-radius: 5px;
-    border-color: gray;
+    border-color: black;
 }
+
+div.search-options{
+    height: 375px;
+}
+div.best-and-worst {
+    background-color: white;
+}
+
+div#starwood-best{
+    border-radius: 5px;
+    border: 5px;
+    float: left;
+    width: 250px;
+}
+
+div#hyatt-best{
+    border-radius: 5px;
+    border: 5px;
+    float: right;
+    width: 250px;
+}
+
 
 h2 {
     margin: 10px auto;
@@ -63,9 +92,14 @@ h2 {
 
 }
 
-div#logout {
-    float: right;
+div#destination{
+    float: left;
 }
+
+div#category{
+    float: right
+    }
+
 
 form.input[type="radio"] {
     margin-right: 20px;

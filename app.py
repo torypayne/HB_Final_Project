@@ -12,7 +12,11 @@ app.secret_key = "tempsecret"
 
 @app.route("/")
 def index():
-	return render_template("index.html")
+	json_data=open('bestandworst.json')
+	data = json.load(json_data)
+	return render_template("index.html", BW = data, HiltonCPP = avgcpp.Hilton, 
+							HyattCPP = avgcpp.Hyatt, MarriottCPP = avgcpp.Marriott,
+							StarwoodCPP = avgcpp.Starwood)
 
 @app.route("/", methods=["POST"])
 def search_data():

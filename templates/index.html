@@ -11,24 +11,56 @@
 	{% block body %}
 	<h4>Easily compare redemptions. Unlock the <strong>value</strong> of your points.</h4>
 		<br>
-		<div class="search-box">
+		<div class="search-options">
+		<div class="search-box" id="destination">
 		<form class="search" method="POST">
-				<h2 class="search-heading">Where do you want to go?</h2>
+				<h2 class="search-heading">Search by Destination</h2>
 				{% for message in get_flashed_messages() %}
 					{{message}} <br> <br>
 				{% endfor %}
 
 				<input type="text" class="form-control" placeholder="Search a City" name="search">
 				<!-- Going to need to add date popup stuff and restrictions on checkin checkout dates -->
-				 <input type="text" class="form-control" id="datepicker" name="checkin" placeholder="Check in - example date 4/10/2014"/> 
-				<input type="text" class="form-control" id="datepicker" name="checkout" placeholder="Check out - example date 4/12/2014"/>
+				 <input type="text" class="form-control" id="checkin-destination" name="checkin" placeholder="Check in - example date 4/10/2014"/> 
+				<input type="text" class="form-control" id="checkout-destination" name="checkout" placeholder="Check out - example date 4/12/2014"/>
 				<br> 
 				<input type="submit" class="btn-lg btn-primary btn-block" value="Submit" >
+		</form>
+		</div>
+		<div class="search-box" id="category">
+		<form class="search" method="POST">
+				<h2 class="search-heading">Search by Hotel Category</h2>
+				{% for message in get_flashed_messages() %}
+					{{message}} <br> <br>
+				{% endfor %}
+
+				<input type="text" class="form-control" placeholder="Search a City" name="search">
+				<!-- Going to need to add date popup stuff and restrictions on checkin checkout dates -->
+				 <input type="text" class="form-control" id="checkin-category" name="checkin" placeholder="Check in - example date 4/10/2014"/> 
+				<input type="text" class="form-control" id="checkout-category" name="checkout" placeholder="Check out - example date 4/12/2014"/>
+				<br> 
+				<input type="submit" class="btn-lg btn-primary btn-block" value="Submit" >
+		</form>
+		</div>
+			<br>
+		</div>
+
+
+		<div class="best-and-worst">
+			<h2>Smart Redemptions</h2>
+			<div id="best-top-box">
+				<div id="starwood-best">
+				<h5>{{BW['Best']['Starwood']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h5>
+				<p>Hotel CPP: {{BW['Best']['Starwood']['cpp']|round(1)}} | SPG Average CPP: {{StarwoodCPP|round(1)}}</p> 
+				<img class="best-worst-image" src="http://images.travelnow.com/{{BW['Best']['Starwood']['photo']}}">
 				</div>
-<!--			<input type="text" class="span2" value="" id="dpd1" > 
-				<input type="text" class="span2" value="" id="dpd2" >
---!>
-	</div>
+				<div id="hyatt-best">
+				<h5>{{BW['Best']['Hyatt']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h5>
+				<img class="best-worst-image" src="http://images.travelnow.com/{{BW['Best']['Hyatt']['photo']}}">
+				</div>
+			</div>
+		</div>		
+
 	<!-- Javascipt files, really need to understand this better -->
 	<script src="/static/js/jquery-2.1.0.js"></script>
 	 <script src="/static/js/bootstrap-datepicker.js"></script>

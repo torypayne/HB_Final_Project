@@ -29,6 +29,7 @@ for row in rows:
 	r = r["HotelListResponse"]["HotelList"]["HotelSummary"]
 	B_W_Dict["Best"][row[2]]["city"] = r["city"]
 	B_W_Dict["Best"][row[2]]["tripAdvisorRatingUrl"] = r["tripAdvisorRatingUrl"]
+	B_W_Dict["Best"][row[2]]["name"] = r["name"]
 	photo = r["thumbNailUrl"]
 	photo = evaluator.fullsize_image(photo)
 	B_W_Dict["Best"][row[2]]["photo"] = photo	
