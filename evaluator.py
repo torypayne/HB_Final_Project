@@ -10,11 +10,6 @@ import config
 DB = None
 CONN = None
 
-print config.HOST 
-print config.USER 
-print config.PASS 
-print config.DB
-
 def connect_to_db():
 	global DB
 	global CONN
@@ -77,14 +72,9 @@ def find_region_code(destination, checkin, checkout):
 	#use hotel ID to look up region code
 	#write destinationstring and regioncode to DB for future reference
 
-
-def curated_hotel_list(region):
+def hotel_list_from_rows(rows):
 	hotel_lookup_list = []
 	hotel_lookup_detail = {}
-	connect_to_db()
-	query = """SELECT * FROM CuratedHotels WHERE RegionID = %s"""
-	DB.execute(query, (region,))
-	rows = DB.fetchall()
 	for row in rows:
 		eanhotelid = row[1]
 		hotel_lookup_detail[eanhotelid] = {}
@@ -105,6 +95,15 @@ def curated_hotel_list(region):
 		hotel_lookup_detail[eanhotelid]["pointsaverpoints"] = row[26]
 		hotel_lookup_list.append(eanhotelid)
 	return (hotel_lookup_list, hotel_lookup_detail)
+
+
+def curated_hotels_by_region(region):
+	connect_to_db()
+	query = """SELECT * FROM CuratedHotels WHERE RegionID = %s"""
+	DB.execute(query, (region,))
+	rows = DB.fetchall()
+	return hotel_list_from_rows(rows)
+
 
 
 def calculate_totalpoints(hotel_dict):
@@ -164,6 +163,8 @@ def merge_data(expedia_list, curated_hotels):
 		hotel_dict["pointsaverpoints"] = curated_hotels[hotelid]["pointsaverpoints"]
 		hotel_dict["totalpoints"] = calculate_totalpoints(hotel_dict)
 		hotel_dict["cpp"] = calculate_cpp(hotel_dict)
+		# print curated_hotels[hotelid]["name"]
+		# hotel_dict["name"] = curated_hotels[hotelid]["name"]
 		# print final_list
 		final_list.append(hotel_dict)
 	return final_list
@@ -228,3 +229,23 @@ def authenticate(email, password):
 		return True
 	else:
 		return None
+
+def curated_hotels_by_id(hotel_id_list):
+	connect_to_db()
+	rows = []
+	for i in range(len(hotel_id_list)):
+		query = """SELECT * FROM CuratedHotels WHERE EANHotelID = %s"""
+		DB.execute(query, (int(hotel_id_list[i]),))
+		row = DB.fetchone()
+		rows.append(row)
+	return hotel_list_from_rows(rows)
+
+def best_and_worst():
+	hotel_id_list = [config.BMARRIOTT, config.WMARRIOTT, config.BSTARWOOD, config.WSTARWOOD, config.BHITLON, config.WHILTON, config.BHYATT, config.WHYATT]
+	hotel_tuple = curated_hotels_by_id(hotel_id_list)
+	hotel_list = hotel_tuple[0]
+	hotel_dict = hotel_tuple[1]
+	expedia_list = request_specific_hotels(hotel_id_list, config.DEFCHECKIN, config.DEFCHECKOUT)
+	r = expedia_list["HotelListResponse"]["HotelList"]["HotelSummary"]
+	r = merge_data(r, hotel_dict)
+	return r	

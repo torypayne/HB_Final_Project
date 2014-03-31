@@ -28,7 +28,7 @@ def search_results():
 	checkin = request.args.get("checkin")
 	checkout = request.args.get("checkout")
 	region = evaluator.find_region_code(city, checkin, checkout)
-	hotel_tuple = evaluator.curated_hotel_list(region)
+	hotel_tuple = evaluator.curated_hotels_by_region(region)
 	hotel_list = hotel_tuple[0]
 	hotel_dict = hotel_tuple[1]
 	expedia_list = evaluator.request_specific_hotels(hotel_list,checkin,checkout)

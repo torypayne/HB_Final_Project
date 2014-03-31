@@ -1,4 +1,5 @@
 import os
+import datetime
 
 env = os.getenv('ENV', "local")
 if env == 'prod':
@@ -12,3 +13,15 @@ else:
 	USER = "root"
 	PASS = ""
 	DB = "hotelchains"
+
+BMARRIOTT = 219357
+WMARRIOTT = 226714
+BSTARWOOD = 105669
+WSTARWOOD = 136353
+BHITLON = 173873
+WHILTON = 113056
+BHYATT = 139597
+WHYATT = 163446
+
+DEFCHECKIN = "5/10/2014"
+DEFCHECKOUT = "5/12/2014"

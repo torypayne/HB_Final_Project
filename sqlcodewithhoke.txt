@@ -3,6 +3,14 @@ mysql://b64cd4ed64d781:eb2052db@us-cdbr-east-05.cleardb.net/heroku_ff4277368662e
 mysql --host=us-cdbr-east-05.cleardb.net --user=b64cd4ed64d781 --password=eb2052db --reconnect heroku_ff4277368662e82 < hotels.sql
 
 
+SQL code to get best redemptions:
+SELECT EANHotelID, Chain, CentsPerPoint FROM CPP_VALUES WHERE CentsPerPoint IN (select MAX(CentsPerPoint) FROM CPP_Values GROUP BY CHAIN); 
+
+Worst redemptions:
+SELECT EANHotelID, Chain, CentsPerPoint FROM CPP_VALUES WHERE CentsPerPoint IN (select MIN(CentsPerPoint) FROM CPP_Values GROUP BY CHAIN);
+
+219357,105669,173873,106103,136353,163446,226714,113056
+
 heroku config:set ENV=prod
 
 SELECT table_schema "DB Name", 
