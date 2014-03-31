@@ -3,6 +3,7 @@ import requests
 import json
 from pprint import pprint
 import evaluator
+import avgcpp
 
 
 app = Flask(__name__)
@@ -46,6 +47,7 @@ def search_results():
 		return redirect(url_for("index"))
 	# flash("You made it past to the end of your code!")
 	# return redirect(url_for("index"))
+
 
 @app.route("/cpp")
 def cpp():
@@ -97,10 +99,10 @@ def process_login():
 		return redirect(url_for("login"))
 
 
-@app.route("/mypoints")
-def show_points():
-	evaluator.find_points(session['email'])
-	return render_template("mypoints.html")
+# @app.route("/mypoints")
+# def show_points():
+# 	evaluator.find_points(session['email'])
+# 	return render_template("mypoints.html")
 
 
 if __name__ == "__main__":

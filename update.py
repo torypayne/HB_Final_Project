@@ -25,6 +25,14 @@ for row in rows:
 	B_W_Dict["Best"][row[2]]["regionid"] = row[3]
 	B_W_Dict["Best"][row[2]]["checkin"] = row[4]
 	B_W_Dict["Best"][row[2]]["checkout"] = row[5]
+	r = evaluator.request_single_hotel(row[1], row[4], row[5])
+	r = r["HotelListResponse"]["HotelList"]["HotelSummary"]
+	B_W_Dict["Best"][row[2]]["city"] = r["city"]
+	B_W_Dict["Best"][row[2]]["tripAdvisorRatingUrl"] = r["tripAdvisorRatingUrl"]
+	photo = r["thumbNailUrl"]
+	photo = evaluator.fullsize_image(photo)
+	B_W_Dict["Best"][row[2]]["photo"] = photo	
+
 
 B_W_Dict["Worst"] = {}
 query = """SELECT * FROM CPP_VALUES WHERE CentsPerPoint IN (select MIN(CentsPerPoint) FROM CPP_Values GROUP BY CHAIN)"""
@@ -37,6 +45,13 @@ for row in rows:
 	B_W_Dict["Worst"][row[2]]["regionid"] = row[3]
 	B_W_Dict["Worst"][row[2]]["checkin"] = row[4]
 	B_W_Dict["Worst"][row[2]]["checkout"] = row[5]
+	r = evaluator.request_single_hotel(row[1], row[4], row[5])
+	r = r["HotelListResponse"]["HotelList"]["HotelSummary"]
+	B_W_Dict["Best"][row[2]]["city"] = r["city"]
+	B_W_Dict["Best"][row[2]]["tripAdvisorRatingUrl"] = r["tripAdvisorRatingUrl"]
+	photo = r["thumbNailUrl"]
+	photo = evaluator.fullsize_image(photo)
+	B_W_Dict["Best"][row[2]]["photo"] = photo	
 
 print B_W_Dict
 
