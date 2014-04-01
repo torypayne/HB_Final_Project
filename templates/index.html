@@ -13,7 +13,7 @@
 		<br>
 		<div class="search-options">
 		<div class="search-box" id="destination">
-		<form class="search" method="POST">
+		<form class="search" action="{{url_for('index')}}" method="POST">
 				<h2 class="search-heading">Search by Destination</h2>
 				{% for message in get_flashed_messages() %}
 					{{message}} <br> <br>
@@ -28,17 +28,14 @@
 		</form>
 		</div>
 		<div class="search-box" id="category">
-		<form class="search" method="POST">
+		<form class="search" method="POST" action="{{url_for('cat_search')}}"">
 				<h2 class="search-heading">Search by Hotel Category</h2>
-				{% for message in get_flashed_messages() %}
-					{{message}} <br> <br>
-				{% endfor %}
 
-				<input type="text" class="form-control" placeholder="Pick a Brand" name="search">
-				<input type="text" class="form-control" placeholder="Pick a Category" name="search">
+				<input type="text" class="form-control" placeholder="Pick a Brand" name="catbrand">
+				<input type="text" class="form-control" placeholder="Pick a Category" name="catnumber">
 				<!-- Going to need to add date popup stuff and restrictions on checkin checkout dates -->
-				 <input type="text" class="form-control" id="checkin-category" name="checkin" placeholder="Check in - example date 4/10/2014"/> 
-				<input type="text" class="form-control" id="checkout-category" name="checkout" placeholder="Check out - example date 4/12/2014"/>
+				 <input type="text" class="form-control" id="checkin-category" name="catcheckin" placeholder="Check in - example date 4/10/2014"/> 
+				<input type="text" class="form-control" id="checkout-category" name="catcheckout" placeholder="Check out - example date 4/12/2014"/>
 				<br> 
 				<input type="submit" class="btn-lg btn-primary btn-block" value="Submit" >
 		</form>

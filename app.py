@@ -27,6 +27,38 @@ def search_data():
 											checkin=checkin, 
 											checkout=checkout))
 
+@app.route("/catsearch", methods=["POST"])
+def cat_search():
+	brand = request.form.get("catbrand")
+	category = request.form.get("catnumber")
+	checkin = request.form.get("catcheckin")
+	checkout = request.form.get("catcheckout")
+	# print brand
+	# print category
+	# print evaluator.search_cat(brand,category)
+	hotel_tuple = evaluator.search_cat(brand, category)
+	# print hotel_tuple
+	hotel_list = hotel_tuple[0]
+	hotel_dict = hotel_tuple[1]
+	expedia_list = evaluator.request_specific_hotels(hotel_list,checkin,checkout)
+	pretty_string =brand+" Category "+str(category)
+	try:
+		print "made it into the try"
+		r = expedia_list["HotelListResponse"]["HotelList"]["HotelSummary"]
+		print r
+		print "trying to marge data"
+		r = evaluator.merge_data(r, hotel_dict)
+		print "Just tried to merge data"
+		# if evaluator.cpp_already_stored(region, checkin, checkout) == False:
+		# 	evaluator.store_cpp(r, region, checkin, checkout)
+		return render_template("search.html", city=pretty_string, 
+											checkin=checkin, 
+											checkout=checkout, 
+											hotel_list=r)
+	except:
+		flash("Made it to the bottom of the code")
+		return redirect(url_for("index"))
+
 @app.route("/search")
 def search_results():
 	city = request.args.get("city")
