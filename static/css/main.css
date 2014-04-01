@@ -68,21 +68,43 @@ div.search-options{
 }
 div.best-and-worst {
     background-color: white;
+    position: absolute;
 }
 
 div#starwood-best{
     border-radius: 5px;
     border: 5px;
     float: left;
+    position: relative;
     width: 250px;
 }
 
 div#hyatt-best{
     border-radius: 5px;
     border: 5px;
-    float: right;
     width: 250px;
+    position: relative;
+    margin-left: 300px
 }
+
+div#hilton-best{
+    border-radius: 5px;
+    border: 5px;
+    border-color: red;
+    width: 250px;
+    position: relative;
+    margin-left: 600px
+}
+
+div#marriott-best{
+    border-radius: 5px;
+    border: 5px;
+    width: 250px;
+    position: relative;
+    margin-left: 900px
+}
+
+
 
 
 h2 {

@@ -51,12 +51,27 @@
 			<div id="best-top-box">
 				<div id="starwood-best">
 				<h5>{{BW['Best']['Starwood']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h5>
-				<p>Hotel CPP: {{BW['Best']['Starwood']['cpp']|round(1)}} | SPG Average CPP: {{StarwoodCPP|round(1)}}</p> 
 				<img class="best-worst-image" src="http://images.travelnow.com/{{BW['Best']['Starwood']['photo']}}">
+				<p>Hotel CPP: {{BW['Best']['Starwood']['cpp']|round(1)}} | SPG Average CPP: {{StarwoodCPP|round(1)}}
+				</p> 
 				</div>
 				<div id="hyatt-best">
 				<h5>{{BW['Best']['Hyatt']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h5>
 				<img class="best-worst-image" src="http://images.travelnow.com/{{BW['Best']['Hyatt']['photo']}}">
+				<p>Hotel CPP: {{BW['Best']['Hyatt']['cpp']|round(1)}} | Hyatt Average CPP: {{HyattCPP|round(1)}}
+				</p> 
+				</div>
+				<div id="hilton-best">
+				<h5>{{BW['Best']['Hilton']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h5>
+				<img class="best-worst-image" src="http://images.travelnow.com/{{BW['Best']['Hilton']['photo']}}">
+				<p>Hotel CPP: {{BW['Best']['Hilton']['cpp']|round(1)}} | Hilton Average CPP: {{HiltonCPP|round(1)}}
+				</p> 
+				</div>
+				<div id="marriott-best">
+				<h5>{{BW['Best']['Marriott']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h5>
+				<img class="best-worst-image" src="http://images.travelnow.com/{{BW['Best']['Marriott']['photo']}}">
+				<p>Hotel CPP: {{BW['Best']['Marriott']['cpp']|round(1)}} | Hyatt Average CPP: {{MarriottCPP|round(1)}}
+				</p> 
 				</div>
 			</div>
 		</div>		
