@@ -13,6 +13,7 @@ img.best-worst-image{
     margin-left: auto;
     margin-right: auto;
     display: block;
+    max-height: 180px;
 }
 
 form.search {
@@ -23,6 +24,16 @@ form.search {
 form.search input.form-control {
     margin-bottom: 5px;
 }
+
+form.checkin-destination{
+    margin-bottom: 5px;
+    width: 200px;
+}
+form.checkout-destination{
+    margin-bottom: 5px;
+    width: 200px;
+}
+
 
 form.search input.btn {
     margin-top: 15px;
@@ -64,11 +75,14 @@ div.search-box {
 }
 
 div.search-options{
-    height: 375px;
+    height: 420px;
 }
 div.best-and-worst {
     background-color: white;
     position: absolute;
+    width: 1147px;
+    border-radius: 5px;
+    
 }
 
 div#starwood-best{
@@ -77,6 +91,9 @@ div#starwood-best{
     float: left;
     position: relative;
     width: 250px;
+    display: inline;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 div#hyatt-best{
@@ -84,7 +101,9 @@ div#hyatt-best{
     border: 5px;
     width: 250px;
     position: relative;
-    margin-left: 300px
+    display: inline-block;
+    padding-left: 50px;
+    padding-right: 20px;
 }
 
 div#hilton-best{
@@ -93,7 +112,9 @@ div#hilton-best{
     border-color: red;
     width: 250px;
     position: relative;
-    margin-left: 600px
+    display: inline-block;
+    padding-left: 50px;
+    padding-right: 20px;
 }
 
 div#marriott-best{
@@ -101,7 +122,9 @@ div#marriott-best{
     border: 5px;
     width: 250px;
     position: relative;
-    margin-left: 900px
+    display: inline-block;
+    padding-left: 50px;
+    padding-right: 20px;
 }
 
 
@@ -129,6 +152,11 @@ form.input[type="radio"] {
 
 #form_ratings {
     width: 145px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h5{
     margin-left: auto;
     margin-right: auto;
 }
