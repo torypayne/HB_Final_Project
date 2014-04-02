@@ -290,6 +290,7 @@ def number_of_nights(points, brand):
 def find_redemptions(options, brand):
 	connect_to_db()
 	hotel_rows = ()
+	for key in options.iterkeys():
 		DB.execute(query, (brand, key))
 		rows = DB.fetchall()
 		hotel_rows = hotel_rows + rows
