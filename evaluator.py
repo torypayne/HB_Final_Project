@@ -84,6 +84,9 @@ def find_region_code(destination, checkin, checkout):
 	#use hotel ID to look up region code
 	#write destinationstring and regioncode to DB for future reference
 
+# def region_code_from_hotel_id(hotelid):
+
+
 def hotel_list_from_rows(rows):
 	hotel_lookup_list = []
 	hotel_lookup_detail = {}
@@ -252,15 +255,6 @@ def curated_hotels_by_id(hotel_id_list):
 		rows.append(row)
 	return hotel_list_from_rows(rows)
 
-# def best_and_worst():
-# 	hotel_id_list = [config.BMARRIOTT, config.WMARRIOTT, config.BSTARWOOD, config.WSTARWOOD, config.BHITLON, config.WHILTON, config.BHYATT, config.WHYATT]
-# 	hotel_tuple = curated_hotels_by_id(hotel_id_list)
-# 	hotel_list = hotel_tuple[0]
-# 	hotel_dict = hotel_tuple[1]
-# 	expedia_list = request_specific_hotels(hotel_id_list, config.DEFCHECKIN, config.DEFCHECKOUT)
-# 	r = expedia_list["HotelListResponse"]["HotelList"]["HotelSummary"]
-# 	r = merge_data(r, hotel_dict)
-# 	return r
 
 def find_points(email):
 	pass
@@ -273,5 +267,3 @@ def search_cat(brand,category):
 	# print rows
 	return hotel_list_from_rows(rows)
 
-# SELECT * FROM CuratedHotels WHERE (LoyaltyProgram = Hyatt AND LoyaltyCategory = 1) LIMIT 10
-# 		
