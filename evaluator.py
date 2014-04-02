@@ -10,6 +10,13 @@ import config
 DB = None
 CONN = None
 
+
+hotel_points_dictionary = {"Hyatt" : [5000,8000,12000,15000,20000,25000,30000], 
+							"Starwood" : [3000,4000,7000,10000,12000,20000,30000], 
+							"Hilton" : [5000, 10000, 20000, 20000, 30000, 30000, 30000, 40000, 50000, 70000], 
+							"Marriott" : [7500,10000,15000,20000,25000,30000,35000,40000,45000]}
+
+
 def connect_to_db():
 	global DB
 	global CONN
@@ -266,4 +273,18 @@ def search_cat(brand,category):
 	rows =  DB.fetchall()
 	# print rows
 	return hotel_list_from_rows(rows)
+
+def number_of_nights(points, brand):
+	points_list = hotel_points_dictionary[brand]
+	options = {}
+	for i in range(len(points_list)):
+		nights = points/points_list[i]
+		if nights > 0:
+			if nights >= 5:
+				if brand != "Hyatt":
+					free_nights = nights/5
+					nights = nights + free_nights
+			options[i+1] = nights
+	return options
+
 
