@@ -66,12 +66,12 @@
 
     <div class="row show-grid">
       <div class="col-xs-6 col-sm-3">  <div class="best-worst-box">
-<h3>{{BW['Worst']['Starwood']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h3>
-        <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Worst']['Starwood']['photo']}}">
+<h4>{{BW['Worst']['Starwood']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h4>
+        <br><img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Worst']['Starwood']['photo']}}">
         <p>Hotel Cents Per Point: {{BW['Worst']['Starwood']['cpp']|round(1)}} <br>SPG Average CPP: {{StarwoodCPP|round(1)}}
         </p> 
       </div></div>
-      <div class="col-xs-6 col-sm-3">  <div class="best-worst-box">          <h3>{{BW['Worst']['Hyatt']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h3>
+      <div class="col-xs-6 col-sm-3">  <div class="best-worst-box">          <h4>{{BW['Worst']['Hyatt']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h4><br>
         <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Worst']['Hyatt']['photo']}}">
         <p>Hotel Cents Per Point: {{BW['Worst']['Hyatt']['cpp']|round(1)}} <br>Hyatt Average CPP: {{HyattCPP|round(1)}}
         </p></div></div>
@@ -80,11 +80,11 @@
       <div class="clearfix visible-xs"></div>
 
       <div class="col-xs-6 col-sm-3">  <div class="best-worst-box">
-        <h3>{{BW['Worst']['Marriott']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h3><br>
+        <h4>{{BW['Worst']['Marriott']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h4><br>
         <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Worst']['Marriott']['photo']}}">
         <p>Hotel Cents Per Point: {{BW['Worst']['Marriott']['cpp']|round(1)}} <br>Marriott Average CPP: {{MarriottCPP|round(1)}}
         </p> </div></div>
-      <div class="col-xs-6 col-sm-3">  <div class="best-worst-box"><h3>{{BW['Worst']['Hilton']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h3>
+      <div class="col-xs-6 col-sm-3">  <div class="best-worst-box"><h4>{{BW['Worst']['Hilton']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h4>
         <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Worst']['Hilton']['photo']}}">
         <p>Hotel Cents Per Point: {{BW['Worst']['Hilton']['cpp']|round(1)}} <br>Hilton Average CPP: {{HiltonCPP|round(1)}}
         </p></div></div>
