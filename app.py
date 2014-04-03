@@ -14,7 +14,7 @@ app.secret_key = "tempsecret"
 def index():
 	json_data=open('bestandworst.json')
 	data = json.load(json_data)
-	return render_template("index.html", BW = data, HiltonCPP = avgcpp.Hilton, 
+	return render_template("altindex.html", BW = data, HiltonCPP = avgcpp.Hilton, 
 							HyattCPP = avgcpp.Hyatt, MarriottCPP = avgcpp.Marriott,
 							StarwoodCPP = avgcpp.Starwood)
 
@@ -82,7 +82,7 @@ def search_results():
 		r = evaluator.merge_data(r, hotel_dict)
 		if evaluator.cpp_already_stored(region, checkin, checkout) == False:
 			evaluator.store_cpp(r, region, checkin, checkout)
-		return render_template("search.html", city=city, 
+		return render_template("altsearch.html", city=city, 
 											checkin=checkin, 
 											checkout=checkout, 
 											hotel_list=r)
