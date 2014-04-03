@@ -27,3 +27,20 @@
 	text-align: left;
 }
 
+.hotelimage{
+	width: auto;
+    height: 230px;
+    max-width: 98%;
+    overflow:hidden;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: inline-block;
+}
+
+.outline-box{
+border: 3px solid #E0E0E0;
+	border-radius: 5px;
+	margin: 2px 2px 2px 2px;
+	text-align: center;
+	margin-bottom: 20px;
+}
