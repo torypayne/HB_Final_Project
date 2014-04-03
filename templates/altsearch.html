@@ -51,12 +51,12 @@
 	</div>
 
 	{% for hotel in hotel_list %}
+<!-- 	<div class="row show-grid"> -->
 	<div class="hotel-box">
-	<div class="outer-image-box">
-	<div class="hotel-image-box">
+	<div class="outer-image-box col-xs-4">
 	<img class="hotelimage" src="http://images.travelnow.com/{{hotel['thumbNailUrl']}}">
-	</div>
-	</div>
+<!-- 	</div> -->
+	<div class="hotel-content-box col-xs-8"
 	<strong>{{hotel["name"]|replace("&apos;","'")|replace("&amp;","&")}}</strong>
 	<br>
 	TripAdvisor: <img src="{{hotel['tripAdvisorRatingUrl']}}">
@@ -75,12 +75,14 @@
 	<a href="http://www.travelnow.com/templates/455248/hotels/{{hotel['hotelId']}}/overview?roomsCount=1&rooms[0].adultsCount=1&rooms[0].childrenCount=0&checkin={{checkin}}&checkout={{checkout}}&currency=USD&currencySymbol=%24&lang=en">Book with Travel Now</a><br>
 	<a href='http://{{hotel["website"]|replace("http://","")}}'>Book with {{hotel["program"]}}</a>
 	</div>
+</div>
 	<br>
+
 	{% endfor %}
 	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
     <script src="/static/js/jquery-2.1.0.js"></script>
-	
+
 	</body>
 </html>

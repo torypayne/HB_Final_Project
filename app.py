@@ -100,8 +100,12 @@ def point_search():
 
 @app.route("/cpp")
 def cpp():
+	json_data=open('bestandworst.json')
+	data = json.load(json_data)
 	chain_cpp = evaluator.find_average_cpp()
-	return render_template("cpp.html", chain_cpp=chain_cpp)
+	return render_template("cpp.html", chain_cpp=chain_cpp, BW = data, HiltonCPP = avgcpp.Hilton, 
+							HyattCPP = avgcpp.Hyatt, MarriottCPP = avgcpp.Marriott,
+							StarwoodCPP = avgcpp.Starwood)
 
 
 @app.route("/register")

@@ -1,20 +1,100 @@
-<html>
-	<head>
-		{% extends 'master.html' %}
-	</head>
-	<body>
-	{% block body %}
-	<h2>How much is a point worth?<br>
-	<soft>It depends what point you're talking about</soft></h2>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>Resorio - Multi Chain Hotel Search with Loyalty Points</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/newmain.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="static/css/starter-template.css" rel="stylesheet">
+    <link href="static/css/datepicker.css" rel="stylesheet">
+
+  <style type="text/css"></style></head>
+
+  <body>
+
+<!--     <div>
+      <img src="static/images/banner.png">
+    </div> -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Resorio</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/cpp">Value of a Point</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="starter-template">
+	<h1>How much is a point worth?<br>
+	<soft>It depends what point you're talking about</soft></h1>
+
 	<h3>Average Cents Per Point Across Chains</h3>
 	<h5>Hilton: {{chain_cpp["Hilton"]|round(2)}}<br><br>
 	Hyatt: {{chain_cpp["Hyatt"]|round(2)}}<br><br>
 	Marriott: {{chain_cpp["Marriott"]|round(2)}}<br><br>
 	Starwood: {{chain_cpp["Starwood"]|round(2)}}<br><br></h5>
 
-	<p>The value of points is a pretty hotly debated topic in the Flyertalk/Frequent Traveller Community.  It's pretty common knowledge that a Starwood point is worth more than a Hilton point, but how much more? While I definitely subcribe to the school of though that a point is worth however much it's worth to you, I also thought it would be helpful to inject some data into the conversation.</p>
-	<p>The above values show the average redemption rates found by searches on Resor.io.  Since you should generally only redeem points in high value situations (or where you can't afford the cash cost), I'd consider those average rates a good guideline for the lowest rate at which you'd be willing to redeem a point.
-	{% endblock %}
-	<script src="/static/js/jquery-2.1.0.js"></script>
+	<p class="lefty-stuff">The value of points is a pretty hotly debated topic in the Flyertalk/Frequent Traveller Community.  It's pretty common knowledge that a Starwood point is worth more than a Hilton point, but how much more? While I definitely subcribe to the school of though that a point is worth however much it's worth to you, I also thought it would be helpful to inject some data into the conversation.</p>
+	<p class="lefty-stuff">The above values show the average redemption rates found by searches on Resor.io.  Since you should generally only redeem points in high value situations (or where you can't afford the cash cost), I'd consider those average rates a good guideline for the lowest rate at which you'd be willing to redeem a point.
+</div>
+	
+      <div class="starter-template">
+        <h1>Hall of Shame</h1>
+        <p class="lead">Some of the worst redemptions we've found.</p>
+      </div>
+
+    <div class="row show-grid">
+      <div class="col-xs-6 col-sm-3">  <div class="best-worst-box">
+<h3>{{BW['Worst']['Starwood']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h3>
+        <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Worst']['Starwood']['photo']}}">
+        <p>Hotel Cents Per Point: {{BW['Worst']['Starwood']['cpp']|round(1)}} <br>SPG Average CPP: {{StarwoodCPP|round(1)}}
+        </p> 
+      </div></div>
+      <div class="col-xs-6 col-sm-3">  <div class="best-worst-box">          <h3>{{BW['Worst']['Hyatt']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h3>
+        <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Worst']['Hyatt']['photo']}}">
+        <p>Hotel Cents Per Point: {{BW['Worst']['Hyatt']['cpp']|round(1)}} <br>Hyatt Average CPP: {{HyattCPP|round(1)}}
+        </p></div></div>
+
+      <!-- Add the extra clearfix for only the required viewport -->
+      <div class="clearfix visible-xs"></div>
+
+      <div class="col-xs-6 col-sm-3">  <div class="best-worst-box">
+        <h3>{{BW['Worst']['Marriott']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h3><br>
+        <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Worst']['Marriott']['photo']}}">
+        <p>Hotel Cents Per Point: {{BW['Worst']['Marriott']['cpp']|round(1)}} <br>Marriott Average CPP: {{MarriottCPP|round(1)}}
+        </p> </div></div>
+      <div class="col-xs-6 col-sm-3">  <div class="best-worst-box"><h3>{{BW['Worst']['Hilton']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h3>
+        <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Worst']['Hilton']['photo']}}">
+        <p>Hotel Cents Per Point: {{BW['Worst']['Hilton']['cpp']|round(1)}} <br>Hilton Average CPP: {{HiltonCPP|round(1)}}
+        </p></div></div>
+    </div>
+  </br>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery-2.1.0.js"></script>
+	
 	</body>
 </html>
