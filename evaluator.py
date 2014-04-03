@@ -268,7 +268,7 @@ def find_points(email):
 
 def search_cat(brand,category):
 	connect_to_db()
-	query = """SELECT * FROM CuratedHotels WHERE (LoyaltyProgram = %s AND LoyaltyCategory = %s) LIMIT 25"""
+	query = """SELECT * FROM CuratedHotels WHERE (LoyaltyProgram = %s AND LoyaltyCategory = %s) LIMIT 25, 25"""
 	DB.execute(query, (brand, category))
 	rows =  DB.fetchall()
 	# print rows
