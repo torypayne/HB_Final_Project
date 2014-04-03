@@ -18,6 +18,14 @@ def index():
 							HyattCPP = avgcpp.Hyatt, MarriottCPP = avgcpp.Marriott,
 							StarwoodCPP = avgcpp.Starwood)
 
+@app.route("/test")
+def test():
+	json_data=open('bestandworst.json')
+	data = json.load(json_data)
+	return render_template("altindex.html", BW = data, HiltonCPP = avgcpp.Hilton, 
+							HyattCPP = avgcpp.Hyatt, MarriottCPP = avgcpp.Marriott,
+							StarwoodCPP = avgcpp.Starwood)
+
 @app.route("/", methods=["POST"])
 def search_data():
 	city = request.form.get("search")
@@ -83,6 +91,11 @@ def search_results():
 		return redirect(url_for("index"))
 	# flash("You made it past to the end of your code!")
 	# return redirect(url_for("index"))
+
+@app.route("/pointsearch")
+def point_search():
+	flash("hey, look at you searching those points")
+	return redirect(url_for("index"))
 
 
 @app.route("/cpp")

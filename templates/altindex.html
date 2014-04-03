@@ -1,0 +1,167 @@
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>Starter Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/newmain.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="static/css/starter-template.css" rel="stylesheet">
+
+  <style type="text/css"></style></head>
+
+  <body>
+
+<!--     <div>
+      <img src="static/images/banner.png">
+    </div> -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Resorio</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Value of a Point</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="starter-template">
+        <h1>Resorio</h1>
+        <p class="lead">Easily compare redemptions. Unlock the <strong>value</strong> of your points.</p>
+      </div>
+    <div class="row">
+        <div class="col-md-4">    <form class="search inline" action="{{url_for('index')}}" method="POST">
+        <h2 class="search-heading">Search by Destination</h2>
+        {% for message in get_flashed_messages() %}
+          {{message}} <br> <br>
+        {% endfor %}
+
+        <input type="text" class="form-control" placeholder="Search a City" id="city-destination" name="search">
+        <!-- Going to need to add date popup stuff and restrictions on checkin checkout dates -->
+        <div class="row">
+          <div class="col-xs-6">
+         <input type="text" class="form-control" id="checkin-destination" name="checkin" placeholder="Check in - example date 4/10/2014"/> 
+        </div>
+        <div class="col-xs-6">
+        <input type="text" class="form-control" id="checkout-destination" name="checkout" placeholder="Check out - example date 4/12/2014"/>
+        </div>
+        </div>
+        <br> 
+        <input type="submit" class="btn-lg btn-primary btn-block btn-success" value="Search" >
+    </form></div>
+        <div class="col-md-4"><form class="search" method="POST" action="{{url_for('point_search')}}">
+        <h2 class="search-heading">Search Point Options</h2>
+
+        <input type="text" class="form-control" placeholder="Pick a Brand" name="catbrand">
+        <input type="text" class="form-control" placeholder="Enter Your Points" name="catnumber">
+        <br> 
+        <input type="submit" class="btn-lg btn-primary btn-block btn-success" value="Compare" >
+    </form></div>
+        <div class="col-md-4">    <form class="search" method="POST" action="{{url_for('cat_search')}}">
+        <h2 class="search-heading">Search by Hotel Category</h2>
+                <div class="row">
+          <div class="col-xs-8">
+        <input type="text" class="form-control" placeholder="Pick a Brand" name="catbrand">
+        </div>
+        <div class="col-xs-4">
+        <input type="text" class="form-control" placeholder="Category" name="catnumber">
+      </div>
+    </div>
+        <!-- Going to need to add date popup stuff and restrictions on checkin checkout dates -->
+        <div class="row">
+          <div class="col-xs-6">
+         <input type="text" class="form-control" id="checkin-category" name="catcheckin" placeholder="Check in - example date 4/10/2014"/> 
+       </div>
+       <div class="col-xs-6">
+        <input type="text" class="form-control" id="checkout-category" name="catcheckout" placeholder="Check out - example date 4/12/2014"/>
+      </div>
+    </div>
+        <br> 
+        <input type="submit" class="btn-lg btn-primary btn-block btn-success" value="Explore" >
+    </form></div>
+      </div>
+
+      <div class="starter-template">
+        <h1>Smart Redemptions</h1>
+        <p class="lead">Beat the Odds. Maximize your Cents Per Point.</p>
+      </div>
+
+    <div class="row show-grid">
+      <div class="col-xs-6 col-sm-3">
+<h3>{{BW['Best']['Starwood']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h3>
+        <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Best']['Starwood']['photo']}}">
+        <p>Hotel CPP: {{BW['Best']['Starwood']['cpp']|round(1)}} <br>SPG Average CPP: {{StarwoodCPP|round(1)}}
+        </p> 
+      </div>
+      <div class="col-xs-6 col-sm-3">          <h3>{{BW['Best']['Hyatt']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h3>
+        <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Best']['Hyatt']['photo']}}">
+        <p>Hotel CPP: {{BW['Best']['Hyatt']['cpp']|round(1)}} <br>Hyatt Average CPP: {{HyattCPP|round(1)}}
+        </p></div>
+
+      <!-- Add the extra clearfix for only the required viewport -->
+      <div class="clearfix visible-xs"></div>
+
+      <div class="col-xs-6 col-sm-3">
+        <h3>{{BW['Worst']['Marriott']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h3>
+        <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Worst']['Marriott']['photo']}}">
+        <p>Hotel CPP: {{BW['Worst']['Marriott']['cpp']|round(1)}} <br>Hyatt Average CPP: {{MarriottCPP|round(1)}}
+        </p> </div>
+      <div class="col-xs-6 col-sm-3"><h3>{{BW['Best']['Hilton']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h3>
+        <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Best']['Hilton']['photo']}}">
+        <p>Hotel CPP: {{BW['Best']['Hilton']['cpp']|round(1)}} <br>Hilton Average CPP: {{HiltonCPP|round(1)}}
+        </p></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+          <h3>{{BW['Best']['Starwood']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h3>
+        <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Best']['Starwood']['photo']}}">
+        <p>Hotel CPP: {{BW['Best']['Starwood']['cpp']|round(1)}} <br>SPG Average CPP: {{StarwoodCPP|round(1)}}
+        </p> </div>
+        <div class="col-md-4">
+          <h3>{{BW['Best']['Hyatt']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h3>
+        <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Best']['Hyatt']['photo']}}">
+        <p>Hotel CPP: {{BW['Best']['Hyatt']['cpp']|round(1)}} <br>Hyatt Average CPP: {{HyattCPP|round(1)}}
+        </p> </div>
+        <div class="col-md-4">
+          <h3>{{BW['Best']['Hilton']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h3>
+        <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Best']['Hilton']['photo']}}">
+        <p>Hotel CPP: {{BW['Best']['Hilton']['cpp']|round(1)}} <br>Hilton Average CPP: {{HiltonCPP|round(1)}}
+        </p> </div>
+        <div class="col-md-4">        
+          <h3>{{BW['Best']['Marriott']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h3>
+        <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Best']['Marriott']['photo']}}">
+        <p>Hotel CPP: {{BW['Best']['Marriott']['cpp']|round(1)}} <br>Hyatt Average CPP: {{MarriottCPP|round(1)}}
+        </p> </div>
+      </div>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+  
+
+</body></html>
