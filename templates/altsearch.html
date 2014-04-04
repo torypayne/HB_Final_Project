@@ -61,7 +61,9 @@
 	{% if hotel["name"]|length <= 39 %}
 	<br>
 	{% endif %}
+	{% if hotel['tripAdvisorRatingUrl'] %}
 	TripAdvisor: <img src="{{hotel['tripAdvisorRatingUrl']}}">
+	{% endif %}
 	<br>
 	Average Nightly Rate: ${{hotel["avgbaserate"]|int}}</br>
 	Trip Total After Taxes: ${{hotel["totalcost"]|int}}<br>

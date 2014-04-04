@@ -156,9 +156,14 @@ def merge_data(expedia_list, curated_hotels):
 		hotel_dict["address"] = expedia_list[i]["address1"]
 		hotel_dict["city"] = expedia_list[i]["city"]
 		hotel_dict["countryCode"] = expedia_list[i]["countryCode"]
-		hotel_dict["tripAdvisorRating"] = expedia_list[i]["tripAdvisorRating"]
-		hotel_dict["tripAdvisorRatingUrl"] = expedia_list[i]["tripAdvisorRatingUrl"]
-		hotel_dict["tripAdvisorReviewCount"] = expedia_list[i]["tripAdvisorReviewCount"]
+		try:
+			hotel_dict["tripAdvisorRating"] = expedia_list[i]["tripAdvisorRating"]
+			hotel_dict["tripAdvisorRatingUrl"] = expedia_list[i]["tripAdvisorRatingUrl"]
+			hotel_dict["tripAdvisorReviewCount"] = expedia_list[i]["tripAdvisorReviewCount"]
+		except:
+			hotel_dict["tripAdvisorRating"] = ""
+			hotel_dict["tripAdvisorRatingUrl"] = ""
+			hotel_dict["tripAdvisorReviewCount"] = ""
 		hotel_dict["locationDescription"] = expedia_list[i]["locationDescription"]
 		hotel_dict["latitude"] = expedia_list[i]["latitude"]
 		hotel_dict["longitude"] = expedia_list[i]["longitude"]

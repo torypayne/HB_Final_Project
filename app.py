@@ -64,24 +64,24 @@ def cat_search():
 											checkout=checkout, 
 											hotel_list=r)
 	except:
-		flash("Made it to the bottom of the code")
+		flash("Oh no! We couldn't find any hotels that matched your request! Double check your destination spelling and specificity, then try different dates.")
 		return redirect(url_for("index"))
 
 @app.route("/search")
 def search_results():
-	city = request.args.get("city")
-	checkin = request.args.get("checkin")
-	checkout = request.args.get("checkout")
-	region = evaluator.find_region_code(city, checkin, checkout)
-	CPP_dictionary = {"Hilton" : avgcpp.Hilton, 
-					"Hyatt" : avgcpp.Hyatt, 
-					"Marriott" : avgcpp.Marriott,
-					"Starwood" : avgcpp.Starwood}
-	hotel_tuple = evaluator.curated_hotels_by_region(region)
-	hotel_list = hotel_tuple[0]
-	hotel_dict = hotel_tuple[1]
-	expedia_list = evaluator.request_specific_hotels(hotel_list,checkin,checkout)
 	try:
+		city = request.args.get("city")
+		checkin = request.args.get("checkin")
+		checkout = request.args.get("checkout")
+		region = evaluator.find_region_code(city, checkin, checkout)
+		CPP_dictionary = {"Hilton" : avgcpp.Hilton, 
+						"Hyatt" : avgcpp.Hyatt, 
+						"Marriott" : avgcpp.Marriott,
+						"Starwood" : avgcpp.Starwood}
+		hotel_tuple = evaluator.curated_hotels_by_region(region)
+		hotel_list = hotel_tuple[0]
+		hotel_dict = hotel_tuple[1]
+		expedia_list = evaluator.request_specific_hotels(hotel_list,checkin,checkout)
 		r = expedia_list["HotelListResponse"]["HotelList"]["HotelSummary"]
 		r = evaluator.merge_data(r, hotel_dict)
 		if evaluator.cpp_already_stored(region, checkin, checkout) == False:
