@@ -50,6 +50,10 @@ def cat_search():
 	hotel_dict = hotel_tuple[1]
 	expedia_list = evaluator.request_specific_hotels(hotel_list,checkin,checkout)
 	pretty_string =brand+" Category "+str(category)
+	CPP_dictionary = {"Hilton" : avgcpp.Hilton, 
+						"Hyatt" : avgcpp.Hyatt, 
+						"Marriott" : avgcpp.Marriott,
+						"Starwood" : avgcpp.Starwood}
 	try:
 		print "made it into the try"
 		r = expedia_list["HotelListResponse"]["HotelList"]["HotelSummary"]
@@ -59,10 +63,11 @@ def cat_search():
 		print "Just tried to merge data"
 		# if evaluator.cpp_already_stored(region, checkin, checkout) == False:
 		# 	evaluator.store_cpp(r, region, checkin, checkout)
-		return render_template("search.html", city=pretty_string, 
+		return render_template("altsearch.html", city=pretty_string, 
 											checkin=checkin, 
 											checkout=checkout, 
-											hotel_list=r)
+											hotel_list=r,
+											CPP_dictionary=CPP_dictionary)
 	except:
 		flash("Oh no! We couldn't find any hotels that matched your request! Double check your destination spelling and specificity, then try different dates.")
 		return redirect(url_for("index"))

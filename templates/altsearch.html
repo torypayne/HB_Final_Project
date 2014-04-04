@@ -58,9 +58,9 @@
 	<img class="hotelimage" src="http://images.travelnow.com/{{hotel['thumbNailUrl']}}">
 <!-- 	</div> -->
 	<h4>{{hotel["name"]|replace("&apos;","'")|replace("&amp;","&")}}</h4>
-	{% if hotel["name"]|length <= 39 %}
+<!-- 	{% if hotel["name"]|length <= 39 %}
 	<br>
-	{% endif %}
+	{% endif %} -->
 	{% if hotel['tripAdvisorRatingUrl'] %}
 	TripAdvisor: <img src="{{hotel['tripAdvisorRatingUrl']}}">
 	{% endif %}
