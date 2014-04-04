@@ -51,13 +51,15 @@
 	</div>
 
 	{% for hotel in hotel_list %}
+
 	<div class="hotel-box">
 	<div class="outer-image-box col-xs-4">
 	<div class="outline-box">
+		{{loop.index}}
 	<img class="hotelimage" src="http://images.travelnow.com/{{hotel['thumbNailUrl']}}">
 <!-- 	</div> -->
 	<h4>{{hotel["name"]|replace("&apos;","'")|replace("&amp;","&")}}</h4>
-	{% if hotel["name"]|length <= 37 %}
+	{% if hotel["name"]|length <= 39 %}
 	<br>
 	{% endif %}
 	TripAdvisor: <img src="{{hotel['tripAdvisorRatingUrl']}}">
@@ -71,13 +73,30 @@
     <br>
     {% endif %} -->
 	Cents Per Point: {{hotel["cpp"]|round(1)}}
+	{% if (20/10)*CPP_dictionary[hotel["program"]] <= hotel["cpp"] %}
+	<span class="label label-success">Great</span>
+	{% endif %}
+	{% if (20/10)*CPP_dictionary[hotel["program"]] > hotel["cpp"] %}
+	{% if (12/10)*CPP_dictionary[hotel["program"]] <= hotel["cpp"] %}
+	<span class="label label-info">Good</span>
+	{% endif %}{% endif %}	 
+	{% if (12/10)*CPP_dictionary[hotel["program"]] > hotel["cpp"] %}
+	{% if (8/10)*CPP_dictionary[hotel["program"]] <= hotel["cpp"] %}
+	<span class="label label-warning">Average</span>
+	{% endif %}{% endif %}	 
+	{% if (8/10)*CPP_dictionary[hotel["program"]] > hotel["cpp"] %}
+	<span class="label label-danger">Bad</span>
+	{% endif %}
 	<br>
-	<a href="http://www.travelnow.com/templates/455248/hotels/{{hotel['hotelId']}}/overview?roomsCount=1&rooms[0].adultsCount=1&rooms[0].childrenCount=0&checkin={{checkin}}&checkout={{checkout}}&currency=USD&currencySymbol=%24&lang=en">Book with Travel Now</a><br>
+	<a href="http://www.travelnow.com/templates/455248/hotels/{{hotel['hotelId']}}/overview?roomsCount=1&rooms[0].adultsCount=1&rooms[0].childrenCount=0&checkin={{checkin}}&checkout={{checkout}}&currency=USD&currencySymbol=%24&lang=en">More Information</a><br>
 	<a href='http://{{hotel["website"]|replace("http://","")}}'>Book with {{hotel["program"]}}</a>
 	</div>
 </div>
 </div>
-	
+		{% if (loop.index) is divisibleby 3 %}
+
+	<div style="clear:both"></div>
+	{% endif %}
 
 	{% endfor %}
 	

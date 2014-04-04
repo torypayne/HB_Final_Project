@@ -73,6 +73,10 @@ def search_results():
 	checkin = request.args.get("checkin")
 	checkout = request.args.get("checkout")
 	region = evaluator.find_region_code(city, checkin, checkout)
+	CPP_dictionary = {"Hilton" : avgcpp.Hilton, 
+					"Hyatt" : avgcpp.Hyatt, 
+					"Marriott" : avgcpp.Marriott,
+					"Starwood" : avgcpp.Starwood}
 	hotel_tuple = evaluator.curated_hotels_by_region(region)
 	hotel_list = hotel_tuple[0]
 	hotel_dict = hotel_tuple[1]
@@ -85,7 +89,8 @@ def search_results():
 		return render_template("altsearch.html", city=city, 
 											checkin=checkin, 
 											checkout=checkout, 
-											hotel_list=r)
+											hotel_list=r,
+											CPP_dictionary=CPP_dictionary)
 	except:
 		flash("Oh no! We couldn't find any hotels that matched your request! Double check your destination spelling and specificity, then try different dates.")
 		return redirect(url_for("index"))
