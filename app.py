@@ -35,26 +35,26 @@ def search_data():
 											checkin=checkin, 
 											checkout=checkout))
 
-@app.route("/catsearch", methods=["POST"])
+@app.route("/catsearch")
 def cat_search():
-	brand = request.form.get("catbrand")
-	category = request.form.get("catnumber")
-	checkin = request.form.get("catcheckin")
-	checkout = request.form.get("catcheckout")
-	# print brand
-	# print category
-	# print evaluator.search_cat(brand,category)
-	hotel_tuple = evaluator.search_cat(brand, category)
-	# print hotel_tuple
-	hotel_list = hotel_tuple[0]
-	hotel_dict = hotel_tuple[1]
-	expedia_list = evaluator.request_specific_hotels(hotel_list,checkin,checkout)
-	pretty_string =brand+" Category "+str(category)
-	CPP_dictionary = {"Hilton" : avgcpp.Hilton, 
-						"Hyatt" : avgcpp.Hyatt, 
-						"Marriott" : avgcpp.Marriott,
-						"Starwood" : avgcpp.Starwood}
 	try:
+		brand = request.args.get("catbrand")
+		category = request.args.get("catnumber")
+		checkin = request.args.get("catcheckin")
+		checkout = request.args.get("catcheckout")
+		# print brand
+		# print category
+		# print evaluator.search_cat(brand,category)
+		hotel_tuple = evaluator.search_cat(brand, category)
+		# print hotel_tuple
+		hotel_list = hotel_tuple[0]
+		hotel_dict = hotel_tuple[1]
+		expedia_list = evaluator.request_specific_hotels(hotel_list,checkin,checkout)
+		pretty_string =brand+" Category "+str(category)
+		CPP_dictionary = {"Hilton" : avgcpp.Hilton, 
+							"Hyatt" : avgcpp.Hyatt, 
+							"Marriott" : avgcpp.Marriott,
+							"Starwood" : avgcpp.Starwood}
 		print "made it into the try"
 		r = expedia_list["HotelListResponse"]["HotelList"]["HotelSummary"]
 		print r
@@ -102,10 +102,41 @@ def search_results():
 	# flash("You made it past to the end of your code!")
 	# return redirect(url_for("index"))
 
+
 @app.route("/pointsearch")
 def point_search():
-	flash("hey, look at you searching those points")
-	return redirect(url_for("index"))
+	try:
+		brand = request.args.get("catbrand")
+		category = request.args.get("catnumber")
+		# checkin = request.args.get("catcheckin")
+		# checkout = request.args.get("catcheckout")
+		hotel_tuple = evaluator.search_cat(brand, category)
+		# print hotel_tuple
+		hotel_list = hotel_tuple[0]
+		hotel_dict = hotel_tuple[1]
+		expedia_list = evaluator.request_specific_hotels(hotel_list,checkin,checkout)
+		pretty_string =brand+" Category "+str(category)
+		CPP_dictionary = {"Hilton" : avgcpp.Hilton, 
+							"Hyatt" : avgcpp.Hyatt, 
+							"Marriott" : avgcpp.Marriott,
+							"Starwood" : avgcpp.Starwood}
+		print "made it into the try"
+		r = expedia_list["HotelListResponse"]["HotelList"]["HotelSummary"]
+		print r
+		print "trying to marge data"
+		r = evaluator.merge_data(r, hotel_dict)
+		print "Just tried to merge data"
+		# if evaluator.cpp_already_stored(region, checkin, checkout) == False:
+		# 	evaluator.store_cpp(r, region, checkin, checkout)
+		return render_template("altsearch.html", city=pretty_string, 
+											checkin=checkin, 
+											checkout=checkout, 
+											hotel_list=r,
+											CPP_dictionary=CPP_dictionary)
+	except:
+		flash("hey, look at you searching those points")
+		# flash("Oh no! We couldn't find any hotels that matched your request! Double check your destination spelling and specificity, then try different dates.")
+		return redirect(url_for("index"))
 
 
 @app.route("/cpp")

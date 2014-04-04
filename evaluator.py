@@ -238,7 +238,7 @@ def create_account(email, password, password_verify):
 	else:
 		query = """INSERT INTO users (Email, PasswordHash, System) VALUES (%s, %s, %s)"""
 		DB.execute(query, (email, hash(password), "Resor"))
-		print DB._last_executed
+		# print DB._last_executed
 		CONN.commit()
 		return "New user"
 
@@ -248,10 +248,10 @@ def authenticate(email, password):
 	query = """SELECT Email, PasswordHash FROM users WHERE email = %s"""
 	DB.execute(query, (email,))
 	row = DB.fetchone()
-	print row
+	# print row
 	DB_password = row[1]
-	print DB_password
-	print password_input
+	# print DB_password
+	# print password_input
 	if int(password_input) == int(DB_password):
 		return True
 	else:
@@ -273,8 +273,9 @@ def find_points(email):
 
 def search_cat(brand,category):
 	connect_to_db()
-	query = """SELECT * FROM CuratedHotels WHERE (LoyaltyProgram = %s AND LoyaltyCategory = %s) LIMIT 25, 25"""
+	query = """SELECT * FROM CuratedHotels WHERE (LoyaltyProgram = %s AND LoyaltyCategory = %s) LIMIT 25"""
 	DB.execute(query, (brand, category))
+	# print DB._last_executed
 	rows =  DB.fetchall()
 	# print rows
 	return hotel_list_from_rows(rows)
