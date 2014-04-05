@@ -281,6 +281,7 @@ def search_cat(brand,category):
 	return hotel_list_from_rows(rows)
 
 def number_of_nights(points, brand):
+	print brand
 	points_list = hotel_points_dictionary[brand]
 	options = {}
 	for i in range(len(points_list)):
@@ -361,6 +362,7 @@ def merge_data_no_prices(expedia_list, curated_hotels):
 	return final_list
 
 def point_options_list(points, brand):
+	print brand
 	options = number_of_nights(points, brand)
 	hotel_tuple = find_redemptions(options, brand)
 	hotel_list = hotel_tuple[0]

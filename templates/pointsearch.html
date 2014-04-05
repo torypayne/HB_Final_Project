@@ -46,58 +46,31 @@
     <div class="container">
 
       <div class="starter-template">
-	<h1>Hotels in {{city}}<br>
-		<small> {{checkin}} - {{checkout}}</small></h1>
+      <h1>{{brand}} Redemption Options<br>
+             <small> {{points}} Points</small></h1>
+       
 	</div>
-
-	{% for hotel in hotel_list %}
-
-	<div class="hotel-box">
-	<div class="outer-image-box col-xs-4">
-	<div class="outline-box">
-	<img class="hotelimage" src="http://images.travelnow.com/{{hotel['thumbNailUrl']}}">
-<!-- 	</div> -->
-	<h4>{{hotel["name"]|replace("&apos;","'")|replace("&amp;","&")}}</h4>
-<!-- 	{% if hotel["name"]|length <= 39 %}
-	<br>
-	{% endif %} -->
-	{% if hotel['tripAdvisorRatingUrl'] %}
-	TripAdvisor: <img src="{{hotel['tripAdvisorRatingUrl']}}">
-	{% endif %}
-	<br>
-	Average Nightly Rate: ${{hotel["avgbaserate"]|int}}</br>
-	Trip Total After Taxes: ${{hotel["totalcost"]|int}}<br>
-	Points Per Night: {{hotel["points"]}}<br>
-	Total Point Cost: {{hotel["totalpoints"]}}<br> 
-<!-- 	<br>{% if hotel["fifthfree"] %}
-    You get every fifth points night free with {{hotel["program"]}}!
-    <br>
-    {% endif %} -->
-	Cents Per Point: {{hotel["cpp"]|round(1)}}
-	{% if (20/10)*CPP_dictionary[hotel["program"]] <= hotel["cpp"] %}
-	<span class="label label-success">Great</span>
-	{% endif %}
-	{% if (20/10)*CPP_dictionary[hotel["program"]] > hotel["cpp"] %}
-	{% if (12/10)*CPP_dictionary[hotel["program"]] <= hotel["cpp"] %}
-	<span class="label label-info">Good</span>
-	{% endif %}{% endif %}	 
-	{% if (12/10)*CPP_dictionary[hotel["program"]] > hotel["cpp"] %}
-	{% if (8/10)*CPP_dictionary[hotel["program"]] <= hotel["cpp"] %}
-	<span class="label label-warning">Average</span>
-	{% endif %}{% endif %}	 
-	{% if (8/10)*CPP_dictionary[hotel["program"]] > hotel["cpp"] %}
-	<span class="label label-danger">Bad</span>
-	{% endif %}
-	<br>
-	<a href="http://www.travelnow.com/templates/455248/hotels/{{hotel['hotelId']}}/overview?roomsCount=1&rooms[0].adultsCount=1&rooms[0].childrenCount=0&checkin={{checkin}}&checkout={{checkout}}&currency=USD&currencySymbol=%24&lang=en">More Information</a><br>
-	<a href='http://{{hotel["website"]|replace("http://","")}}'>{{hotel["program"]}} Website</a>
-	</div>
+{% for category in category_list %}
+     <h2>{{options[loop.index]}} Nights in a Category {{loop.index}}</h2>
+{% for hotel in category_list[(loop.index -1)] %}
+<div class="hotel-box">
+  <div class="outer-image-box col-xs-4">
+  <div class="outline-box">
+  <img class="hotelimage" src="http://images.travelnow.com/{{hotel['thumbNailUrl']}}">
+<!--  </div> -->
+  <h4>{{hotel["name"]|replace("&apos;","'")|replace("&amp;","&")}}</h4>
+<!--  {% if hotel["name"]|length <= 39 %}
+  <br>
+  {% endif %} -->
+  {% if hotel['tripAdvisorRatingUrl'] %}
+  TripAdvisor: <img src="{{hotel['tripAdvisorRatingUrl']}}">
+  {% endif %}
+  <br>
 </div>
 </div>
-		{% if (loop.index) is divisibleby 3 %}
+</div>
 
-	<div style="clear:both"></div>
-	{% endif %}
+{% endfor %}
 
 	{% endfor %}
 	

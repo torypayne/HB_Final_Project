@@ -10,6 +10,10 @@ import config
 app = Flask(__name__)
 app.secret_key = "tempsecret"
 # app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://b64cd4ed64d781:eb2052db@us-cdbr-east-05.cleardb.net/heroku_ff4277368662e82?reconnect=true"
+hotel_points_dictionary = {"Hyatt" : [5000,8000,12000,15000,20000,25000,30000], 
+							"Starwood" : [3000,4000,7000,10000,12000,20000,30000], 
+							"Hilton" : [5000, 10000, 20000, 20000, 30000, 30000, 30000, 40000, 50000, 70000], 
+							"Marriott" : [7500,10000,15000,20000,25000,30000,35000,40000,45000]}
 
 @app.route("/")
 def index():
@@ -109,25 +113,6 @@ def point_search():
 	category_tuple = evaluator.point_options_list(points, brand)
 	options = category_tuple[0]
 	category_list = category_tuple[1]
-	# checkin = request.args.get("catcheckin")
-	# checkout = request.args.get("catcheckout")
-	# hotel_tuple = evaluator.search_cat(brand, category)
-	# # print hotel_tuple
-	# hotel_list = hotel_tuple[0]
-	# hotel_dict = hotel_tuple[1]
-	# expedia_list = evaluator.request_specific_hotels(hotel_list,checkin,checkout)
-	# pretty_string =brand+" Category "+str(category)
-	# CPP_dictionary = {"Hilton" : avgcpp.Hilton, 
-	# 					"Hyatt" : avgcpp.Hyatt, 
-	# 					"Marriott" : avgcpp.Marriott,
-	# 					"Starwood" : avgcpp.Starwood}
-	# r = expedia_list["HotelListResponse"]["HotelList"]["HotelSummary"]
-	# # print r
-	# # print "trying to marge data"
-	# r = evaluator.merge_data(r, hotel_dict)
-	# print "Just tried to merge data"
-	# if evaluator.cpp_already_stored(region, checkin, checkout) == False:
-	# 	evaluator.store_cpp(r, region, checkin, checkout)
 	return render_template("pointsearch.html", points=points, 
 										brand=brand, 
 										category_list=category_list,
