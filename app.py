@@ -107,22 +107,22 @@ def search_results():
 
 @app.route("/pointsearch")
 def point_search():
-	# try:
-	brand = request.args.get("pointsbrand")
-	points = request.args.get("points")
-	category_tuple = evaluator.point_options_list(points, brand)
-	options = category_tuple[0]
-	category_list = category_tuple[1]
-	return render_template("pointsearch.html", points=points, 
-										brand=brand, 
-										category_list=category_list,
-										options=options,
-										checkin=config.DEFCHECKIN,
-										checkout=config.DEFCHECKOUT)
-	# except:
+	try:
+		brand = request.args.get("pointsbrand")
+		points = request.args.get("points")
+		category_tuple = evaluator.point_options_list(points, brand)
+		options = category_tuple[0]
+		category_list = category_tuple[1]
+		return render_template("pointsearch.html", points=points, 
+											brand=brand, 
+											category_list=category_list,
+											options=options,
+											checkin=config.DEFCHECKIN,
+											checkout=config.DEFCHECKOUT)
+	except:
 	# 	flash("hey, look at you searching those points")
-	# 	# flash("Oh no! We couldn't find any hotels that matched your request! Double check your destination spelling and specificity, then try different dates.")
-	# 	return redirect(url_for("index"))
+		flash("Oh no! We couldn't find any hotels that matched your request! Double check your destination spelling and specificity, then try different dates.")
+		return redirect(url_for("index"))
 
 
 @app.route("/cpp")
