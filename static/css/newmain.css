@@ -2,6 +2,19 @@
     margin-bottom: 5px;
 }
 
+.logo{
+    font-family: 'Rosario', sans-serif;
+    color: #5cb85c !important;
+    font-size: 22px;
+}
+
+.signin{
+    width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
 .best-worst-image{
     width: auto;
     height: 128px;
