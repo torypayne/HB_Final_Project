@@ -4,6 +4,7 @@ import json
 from pprint import pprint
 import evaluator
 import avgcpp
+import config
 
 
 app = Flask(__name__)
@@ -55,10 +56,7 @@ def cat_search():
 							"Hyatt" : avgcpp.Hyatt, 
 							"Marriott" : avgcpp.Marriott,
 							"Starwood" : avgcpp.Starwood}
-		print "made it into the try"
 		r = expedia_list["HotelListResponse"]["HotelList"]["HotelSummary"]
-		print r
-		print "trying to marge data"
 		r = evaluator.merge_data(r, hotel_dict)
 		print "Just tried to merge data"
 		# if evaluator.cpp_already_stored(region, checkin, checkout) == False:
@@ -105,38 +103,41 @@ def search_results():
 
 @app.route("/pointsearch")
 def point_search():
-	try:
-		brand = request.args.get("catbrand")
-		category = request.args.get("catnumber")
-		# checkin = request.args.get("catcheckin")
-		# checkout = request.args.get("catcheckout")
-		hotel_tuple = evaluator.search_cat(brand, category)
-		# print hotel_tuple
-		hotel_list = hotel_tuple[0]
-		hotel_dict = hotel_tuple[1]
-		expedia_list = evaluator.request_specific_hotels(hotel_list,checkin,checkout)
-		pretty_string =brand+" Category "+str(category)
-		CPP_dictionary = {"Hilton" : avgcpp.Hilton, 
-							"Hyatt" : avgcpp.Hyatt, 
-							"Marriott" : avgcpp.Marriott,
-							"Starwood" : avgcpp.Starwood}
-		print "made it into the try"
-		r = expedia_list["HotelListResponse"]["HotelList"]["HotelSummary"]
-		print r
-		print "trying to marge data"
-		r = evaluator.merge_data(r, hotel_dict)
-		print "Just tried to merge data"
-		# if evaluator.cpp_already_stored(region, checkin, checkout) == False:
-		# 	evaluator.store_cpp(r, region, checkin, checkout)
-		return render_template("altsearch.html", city=pretty_string, 
-											checkin=checkin, 
-											checkout=checkout, 
-											hotel_list=r,
-											CPP_dictionary=CPP_dictionary)
-	except:
-		flash("hey, look at you searching those points")
-		# flash("Oh no! We couldn't find any hotels that matched your request! Double check your destination spelling and specificity, then try different dates.")
-		return redirect(url_for("index"))
+	# try:
+	brand = request.args.get("pointsbrand")
+	points = request.args.get("points")
+	category_tuple = evaluator.point_options_list(points, brand)
+	options = category_tuple[0]
+	category_list = category_tuple[1]
+	# checkin = request.args.get("catcheckin")
+	# checkout = request.args.get("catcheckout")
+	# hotel_tuple = evaluator.search_cat(brand, category)
+	# # print hotel_tuple
+	# hotel_list = hotel_tuple[0]
+	# hotel_dict = hotel_tuple[1]
+	# expedia_list = evaluator.request_specific_hotels(hotel_list,checkin,checkout)
+	# pretty_string =brand+" Category "+str(category)
+	# CPP_dictionary = {"Hilton" : avgcpp.Hilton, 
+	# 					"Hyatt" : avgcpp.Hyatt, 
+	# 					"Marriott" : avgcpp.Marriott,
+	# 					"Starwood" : avgcpp.Starwood}
+	# r = expedia_list["HotelListResponse"]["HotelList"]["HotelSummary"]
+	# # print r
+	# # print "trying to marge data"
+	# r = evaluator.merge_data(r, hotel_dict)
+	# print "Just tried to merge data"
+	# if evaluator.cpp_already_stored(region, checkin, checkout) == False:
+	# 	evaluator.store_cpp(r, region, checkin, checkout)
+	return render_template("pointsearch.html", points=points, 
+										brand=brand, 
+										category_list=category_list,
+										options=options,
+										checkin=config.DEFCHECKIN,
+										checkout=config.DEFCHECKOUT)
+	# except:
+	# 	flash("hey, look at you searching those points")
+	# 	# flash("Oh no! We couldn't find any hotels that matched your request! Double check your destination spelling and specificity, then try different dates.")
+	# 	return redirect(url_for("index"))
 
 
 @app.route("/cpp")

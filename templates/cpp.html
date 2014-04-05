@@ -48,24 +48,27 @@
       <div class="starter-template">
 	<h1>How much is a point worth?<br>
 	<soft>It depends what point you're talking about</soft></h1>
-	<div class="col-xs-6 col-sm-6">
+
+	<div>
+	<p class="lefty-stuff">The value of points is a pretty hotly debated topic in the Flyertalk/Frequent Traveller Community.  It's pretty common knowledge that a Starwood point is worth more than a Hilton point, but how much more? While I definitely subcribe to the school of though that a point is worth however much it's worth to you, I also thought it would be helpful to inject some data into the conversation.</p>
+	<p class="lefty-stuff">The above values show the average redemption rates found by searches on Resorio.  Since you should generally only redeem points in high value situations (or where you can't afford the cash cost), I'd consider those average rates a good guideline for the lowest rate at which you'd be willing to redeem a point.
+</div>
+	
+	<div class="col-xs-6 col-sm-6 lefty-stuff">
 	<h3>Average Cents Per Point Across Chains</h3>
 	<h5>Hilton: {{chain_cpp["Hilton"]|round(2)}}<br><br>
 	Hyatt: {{chain_cpp["Hyatt"]|round(2)}}<br><br>
 	Marriott: {{chain_cpp["Marriott"]|round(2)}}<br><br>
 	Starwood: {{chain_cpp["Starwood"]|round(2)}}<br><br></h5>
 </div>
-	<div class="col-xs-6 col-sm-6" id="ratings-key">
-	<h3>Redemption Ratings</h3><br>
-	<span class="label label-success">Great</span> Twice the average value<br>
-	<span class="label label-info">Good</span> At least 20% above average, but less than double<br>
-	<span class="label label-warning">Average</span> Within 20% of the average redemption<br>
+	<div class="col-xs-6 col-sm-6 lefty-stuff">
+	<h3>Redemption Ratings</h3>
+	<span class="label label-success">Great</span> Twice the average value<br></br>
+	<span class="label label-info">Good</span> At least 20% above average, but less than double<br></br>
+	<span class="label label-warning">Average</span> Within 20% of the average redemption<br></br>
 	<span class="label label-danger">Bad</span> At least 20% below average<br><br><br>
 </div>
-	<p class="lefty-stuff">The value of points is a pretty hotly debated topic in the Flyertalk/Frequent Traveller Community.  It's pretty common knowledge that a Starwood point is worth more than a Hilton point, but how much more? While I definitely subcribe to the school of though that a point is worth however much it's worth to you, I also thought it would be helpful to inject some data into the conversation.</p>
-	<p class="lefty-stuff">The above values show the average redemption rates found by searches on Resor.io.  Since you should generally only redeem points in high value situations (or where you can't afford the cash cost), I'd consider those average rates a good guideline for the lowest rate at which you'd be willing to redeem a point.
 </div>
-	
       <div class="starter-template">
         <h1>Hall of Shame</h1>
         <p class="lead">Some of the worst redemptions we've found.</p>

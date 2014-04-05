@@ -284,7 +284,7 @@ def number_of_nights(points, brand):
 	points_list = hotel_points_dictionary[brand]
 	options = {}
 	for i in range(len(points_list)):
-		nights = points/points_list[i]
+		nights = int(points)/int(points_list[i])
 		if nights > 0:
 			if nights >= 5:
 				if brand != "Hyatt":
@@ -296,11 +296,87 @@ def number_of_nights(points, brand):
 def find_redemptions(options, brand):
 	connect_to_db()
 	hotel_rows = ()
+	query = """SELECT * FROM CuratedHotels WHERE (LoyaltyProgram = %s AND LoyaltyCategory = %s AND TripAdvisorRating > 4) LIMIT 3"""
 	for key in options.iterkeys():
 		DB.execute(query, (brand, key))
 		rows = DB.fetchall()
 		hotel_rows = hotel_rows + rows
 	return hotel_list_from_rows(hotel_rows)
+
+def xml_hotels_no_dates(hotel_id_list):
+	hotel_id_list = ",".join([str(i) for i in hotel_id_list])
+	xml_request = "<HotelListRequest><hotelIdList>"+hotel_id_list+"</hotelIdList></HotelListRequest>"
+	print xml_request
+	payload = {"cid": "55505", "minorRev": "99", 
+			"apiKey": "rddk3k82jjqbk4wgfbkb6qg8",
+			"locale": "en_US", "currencyCode": "USD",
+			"xml": xml_request}
+	r = requests.get("http://api.eancdn.com/ean-services/rs/hotel/v3/list?", params=payload)
+	r = json.loads(r.text)
+	# pprint(r)
+	return r
+
+def merge_data_no_prices(expedia_list, curated_hotels):
+	final_list =[]
+	if type(expedia_list) == dict:
+		expedia_list = [expedia_list]
+	for i in range(len(expedia_list)):
+		hotelid = expedia_list[i]["hotelId"]
+		hotel_dict = {}
+		hotel_dict["hotelId"] = hotelid
+		hotel_dict["name"] = expedia_list[i]["name"]
+		hotel_dict["address"] = expedia_list[i]["address1"]
+		hotel_dict["city"] = expedia_list[i]["city"]
+		hotel_dict["countryCode"] = expedia_list[i]["countryCode"]
+		try:
+			hotel_dict["tripAdvisorRating"] = expedia_list[i]["tripAdvisorRating"]
+			hotel_dict["tripAdvisorRatingUrl"] = expedia_list[i]["tripAdvisorRatingUrl"]
+			hotel_dict["tripAdvisorReviewCount"] = expedia_list[i]["tripAdvisorReviewCount"]
+		except:
+			hotel_dict["tripAdvisorRating"] = ""
+			hotel_dict["tripAdvisorRatingUrl"] = ""
+			hotel_dict["tripAdvisorReviewCount"] = ""
+		hotel_dict["locationDescription"] = expedia_list[i]["locationDescription"]
+		hotel_dict["latitude"] = expedia_list[i]["latitude"]
+		hotel_dict["longitude"] = expedia_list[i]["longitude"]
+		hotel_dict["thumbNailUrl"] = fullsize_image(expedia_list[i]["thumbNailUrl"])
+		hotel_dict["website"] = curated_hotels[hotelid]["website"]
+		hotel_dict["program"] = curated_hotels[hotelid]["program"]
+		hotel_dict["category"] = curated_hotels[hotelid]["category"]
+		hotel_dict["points"] = curated_hotels[hotelid]["points"]
+		hotel_dict["fifthfree"] = curated_hotels[hotelid]["fifthfree"]
+		hotel_dict["candp"] = curated_hotels[hotelid]["candp"]
+		hotel_dict["cashofcandp"] = curated_hotels[hotelid]["cashofcandp"]
+		hotel_dict["pointsofcandp"] = curated_hotels[hotelid]["pointsofcandp"]
+		hotel_dict["highseason"] = curated_hotels[hotelid]["highseason"]
+		hotel_dict["highseasondates"] = curated_hotels[hotelid]["highseasondates"]
+		hotel_dict["highseasonpoints"] = curated_hotels[hotelid]["highseasonpoints"]
+		hotel_dict["pointsaver"] = curated_hotels[hotelid]["pointsaver"]
+		hotel_dict["pointsaverdates"] = curated_hotels[hotelid]["pointsaverdates"]
+		hotel_dict["pointsaverpoints"] = curated_hotels[hotelid]["pointsaverpoints"]
+		# print curated_hotels[hotelid]["name"]
+		# hotel_dict["name"] = curated_hotels[hotelid]["name"]
+		# print final_list
+		final_list.append(hotel_dict)
+	return final_list
+
+def point_options_list(points, brand):
+	options = number_of_nights(points, brand)
+	hotel_tuple = find_redemptions(options, brand)
+	hotel_list = hotel_tuple[0]
+	hotel_dict = hotel_tuple[1]
+	expedia_list = xml_hotels_no_dates(hotel_list)
+	expedia_list = expedia_list["HotelListResponse"]["HotelList"]["HotelSummary"]
+	r = merge_data_no_prices(expedia_list, hotel_dict)
+	cat_list = []
+	for i in range(len(options)):
+		mini_cat_list = []
+		cat_list.append(mini_cat_list)
+	for j in range(len(r)):
+		cat_index = int(r[j]["category"]) - 1
+		cat_list[cat_index].append(r[j])
+	return (options, cat_list)
+
 
 
 
