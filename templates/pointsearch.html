@@ -51,7 +51,9 @@
        
 	</div>
 {% for category in category_list %}
-     <h2>{{options[loop.index]}} Nights in a Category {{loop.index}}</h2>
+     <h2 class="category-nights">{{options[loop.index]}} Night{% if options[loop.index] > 1 %}s{% endif %}
+
+      in a Category {{loop.index}}</h2>
 {% for hotel in category_list[(loop.index -1)] %}
 <div class="hotel-box">
   <div class="outer-image-box col-xs-4">
@@ -66,12 +68,14 @@
   TripAdvisor: <img src="{{hotel['tripAdvisorRatingUrl']}}">
   {% endif %}
   <br>
+  <a href="http://www.travelnow.com/templates/455248/hotels/{{hotel['hotelId']}}/overview?roomsCount=1&rooms[0].adultsCount=1&rooms[0].childrenCount=0&checkin={{checkin}}&checkout={{checkout}}&currency=USD&currencySymbol=%24&lang=en">More Information</a><br>
+  <a href='http://{{hotel["website"]|replace("http://","")}}'>{{hotel["program"]}} Website</a>
 </div>
 </div>
 </div>
 
 {% endfor %}
-
+  <div style="clear:both"></div>
 	{% endfor %}
 	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
