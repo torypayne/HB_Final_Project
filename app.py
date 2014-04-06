@@ -65,7 +65,7 @@ def cat_search():
 		print "Just tried to merge data"
 		# if evaluator.cpp_already_stored(region, checkin, checkout) == False:
 		# 	evaluator.store_cpp(r, region, checkin, checkout)
-		return render_template("altsearch.html", city=pretty_string, 
+		return render_template("catsearch.html", city=pretty_string, 
 											checkin=checkin, 
 											checkout=checkout, 
 											hotel_list=r,

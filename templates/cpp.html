@@ -54,14 +54,14 @@
 	<p class="lefty-stuff">The above values show the average redemption rates found by searches on Resorio.  Since you should generally only redeem points in high value situations (or where you can't afford the cash cost), I'd consider those average rates a good guideline for the lowest rate at which you'd be willing to redeem a point.
 </div>
 	
-	<div class="col-xs-6 col-sm-6 lefty-stuff">
+	<div class="col-md-6 lefty-stuff">
 	<h3>Average Cents Per Point Across Chains</h3>
 	<h5>Hilton: {{chain_cpp["Hilton"]|round(2)}}<br><br>
 	Hyatt: {{chain_cpp["Hyatt"]|round(2)}}<br><br>
 	Marriott: {{chain_cpp["Marriott"]|round(2)}}<br><br>
 	Starwood: {{chain_cpp["Starwood"]|round(2)}}<br><br></h5>
 </div>
-	<div class="col-xs-6 col-sm-6 lefty-stuff">
+	<div class="col-md-6 lefty-stuff">
 	<h3>Redemption Ratings</h3>
 	<span class="label label-success">Great</span> Twice the average value<br></br>
 	<span class="label label-info">Good</span> At least 20% above average, but less than double<br></br>
@@ -75,13 +75,13 @@
       </div>
 
     <div class="row show-grid">
-      <div class="col-xs-6 col-sm-3">  <div class="best-worst-box">
+      <div class="col-md-3">  <div class="best-worst-box">
 <h4>{{BW['Worst']['Starwood']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h4>
         <br><img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Worst']['Starwood']['photo']}}">
         <p>Hotel Cents Per Point: {{BW['Worst']['Starwood']['cpp']|round(1)}} <br>SPG Average CPP: {{StarwoodCPP|round(1)}}
         </p> 
       </div></div>
-      <div class="col-xs-6 col-sm-3">  <div class="best-worst-box">          <h4>{{BW['Worst']['Hyatt']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h4><br>
+      <div class="col-md-3">  <div class="best-worst-box">          <h4>{{BW['Worst']['Hyatt']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h4><br>
         <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Worst']['Hyatt']['photo']}}">
         <p>Hotel Cents Per Point: {{BW['Worst']['Hyatt']['cpp']|round(1)}} <br>Hyatt Average CPP: {{HyattCPP|round(1)}}
         </p></div></div>
@@ -89,12 +89,12 @@
       <!-- Add the extra clearfix for only the required viewport -->
       <div class="clearfix visible-xs"></div>
 
-      <div class="col-xs-6 col-sm-3">  <div class="best-worst-box">
+      <div class="col-md-3">  <div class="best-worst-box">
         <h4>{{BW['Worst']['Marriott']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h4><br>
         <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Worst']['Marriott']['photo']}}">
         <p>Hotel Cents Per Point: {{BW['Worst']['Marriott']['cpp']|round(1)}} <br>Marriott Average CPP: {{MarriottCPP|round(1)}}
         </p> </div></div>
-      <div class="col-xs-6 col-sm-3">  <div class="best-worst-box"><h4>{{BW['Worst']['Hilton']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h4>
+      <div class="col-md-3">  <div class="best-worst-box"><h4>{{BW['Worst']['Hilton']['name']|replace("&apos;","'")|replace("&amp;","&")}}</h4>
         <img class="best-worst-image img-responsive" src="http://images.travelnow.com/{{BW['Worst']['Hilton']['photo']}}">
         <p>Hotel Cents Per Point: {{BW['Worst']['Hilton']['cpp']|round(1)}} <br>Hilton Average CPP: {{HiltonCPP|round(1)}}
         </p></div></div>

@@ -39,16 +39,37 @@
             <li><a href="/login">Login</a></li>
             <li><a href="/register">Register</a></li>
           </ul>
-          <div class="col-md-8"><div class="spacing"><form class="search form-inline" method="GET" action="{{url_for('search_results')}}"></div>
+          <div class="col-md-8"><div class="spacing"><form class="search form-inline" method="GET" action="{{url_for('cat_search')}}"></div>
             <div class="col-md-3">
-
-        <input type="text" class="form-control form-inline nav-smaller" placeholder="Destination" name="city" default="{{city}}">
-      </div>
-            <div class="col-md-3">
-         <input type="text" class="form-control nav-smaller" id="dpd1" name="checkin" placeholder="Check in" default="{{checkin}}"/> 
+                <select class="form-control form-inline nav-smaller" placeholder="Pick a Brand" name="catbrand">
+            <option>Pick a Brand</option>
+            <option>Hilton</option>
+            <option>Hyatt</option>
+            <option>Marriott</option>
+            <option>Starwood</option>
+  </select>
         </div>
-        <div class="col-md-3">
-        <input type="text" class="form-control nav-smaller" id="dpd2" name="checkout" placeholder="Check out" default="{{checkout}}"/>
+    <div class="col-md-2">
+        <select class="form-control form-inline nav-smaller" placeholder="Category" name="catnumber">
+          <option>Category</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+         </select>
+      </div>
+        
+            <div class="col-md-2">
+         <input type="text" class="form-control nav-smaller" id="dpd1" name="catcheckin" placeholder="Check in" default="{{checkin}}"/> 
+        </div>
+        <div class="col-md-2">
+        <input type="text" class="form-control nav-smaller" id="dpd2" name="catcheckout" placeholder="Check out" default="{{checkout}}"/>
         </div>
         <div class="col-md-3">
         <input type="submit" class="btn btn-success" value="Search" >

@@ -39,16 +39,19 @@
             <li><a href="/login">Login</a></li>
             <li><a href="/register">Register</a><li></ul>  
     <!--/.nav-collapse -->
-        <div class="col-md-8"><br><form class="search form-inline" method="GET" action="{{url_for('point_search')}}">
-        <select class="form-control form-inline nav-search" placeholder="Pick a Brand" name="pointsbrand" default="{{brand}}">
+        <div class="col-md-8"><div class="spacing"><form class="search form-inline" method="GET" action="{{url_for('point_search')}}"></div>
+        <div class="col-md-4">
+        <select class="form-control form-inline nav-search" placeholder="Enter Your Points" name="pointsbrand" default="{{brand}}">
     <option>Pick a Brand</option>
     <option>Hilton</option>
     <option>Hyatt</option>
     <option>Marriott</option>
     <option>Starwood</option>
-    </select>
-        <input type="text" class="form-control form-inline" placeholder="Enter Your Points" name="points" default="{{points}}">
-        <input type="submit" class="btn btn-success" value="Compare" >
+    </select></div>
+    <div class="col-md-4">
+        <input type="text" class="form-control form-inline" placeholder="{{points}}" name="points" default="{{points}}"></div>
+        <div class="col-md-4">
+        <input type="submit" class="btn btn-success" value="Compare" ></div>
     </form>
       
         </div>

@@ -14,8 +14,12 @@
     margin-left: auto;
 }
 
-.nav-search{
-    margin-left: 40%;
+.nav-smaller{
+    padding-top: 5px;
+}
+
+.spacing{
+    margin: 2px 2px 2px 5px;
 }
 
 .best-worst-image{
