@@ -138,6 +138,15 @@
 
 	{% endfor %}
 	
+<!--     Pages: {{number_of_pages}} -->
+  <ul class="pagination">
+    {% for page in number_of_pages %}
+  <li><a href="/catsearch?catbrand={{brand}}&catnumber={{category}}&catcheckin={{checkin}}&catcheckout={{checkout}}&page={{page}}">{{page}}</a></li>
+  {% endfor %}
+</ul>
+<br>
+<br>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="static/js/bootstrap.min.js"></script>
     <script src="/static/js/jquery-2.1.0.js"></script>
