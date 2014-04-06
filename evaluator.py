@@ -273,12 +273,24 @@ def find_points(email):
 
 def search_cat(brand,category):
 	connect_to_db()
-	query = """SELECT * FROM CuratedHotels WHERE (LoyaltyProgram = %s AND LoyaltyCategory = %s) LIMIT 25"""
+	query = """SELECT * FROM CuratedHotels WHERE (LoyaltyProgram = %s AND LoyaltyCategory = %s) LIMIT 20"""
 	DB.execute(query, (brand, category))
 	# print DB._last_executed
 	rows =  DB.fetchall()
 	# print rows
 	return hotel_list_from_rows(rows)
+
+def number_of_pages(brand,category):
+	connect_to_db()
+	query = """SELECT COUNT(*) FROM CuratedHotels WHERE (LoyaltyProgram = %s AND LoyaltyCategory = %s)"""
+	DB.execute(query, (brand, category))
+	row = DB.fetchone()
+	hotelcount = row[0]
+	print hotelcount
+	pages = int(hotelcount)/20
+	pages += 1
+	print pages
+	return pages
 
 def number_of_nights(points, brand):
 	print brand
