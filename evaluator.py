@@ -63,6 +63,18 @@ def request_single_hotel(hotel_id_list,checkin, checkout):
 	# pprint(r)
 	return r	
 
+def request_single_hotel_no_dates(hotel_id_list):
+	xml_request = "<HotelListRequest><hotelIdList>"+str(hotel_id_list)+"</hotelIdList></HotelListRequest>"
+	print xml_request
+	payload = {"cid": "55505", "minorRev": "99", 
+			"apiKey": "rddk3k82jjqbk4wgfbkb6qg8",
+			"locale": "en_US", "currencyCode": "USD",
+			"xml": xml_request}
+	r = requests.get("http://api.eancdn.com/ean-services/rs/hotel/v3/list?", params=payload)
+	r = json.loads(r.text)
+	# pprint(r)
+	return r	
+
 #May want to look up some safety stuff since mySQL isn't accepting ? instead of %s
 def find_region_code(destination, checkin, checkout):
 	connect_to_db()

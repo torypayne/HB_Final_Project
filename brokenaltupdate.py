@@ -1,0 +1,185 @@
+import json
+import evaluator
+import MySQLdb
+import config
+
+DB = None
+CONN = None
+
+def connect_to_db():
+	global DB
+	global CONN
+	CONN = MySQLdb.connect(host=config.HOST, user=config.USER, passwd=config.PASS, db=config.DB)
+	DB = CONN.cursor()
+
+
+exclude_list = []
+B_W_Dict = {}
+B_W_Dict["Best"] = {}
+connect_to_db()
+query = """SELECT * FROM CPP_VALUES WHERE CentsPerPoint IN (select MAX(CentsPerPoint) FROM CPP_Values GROUP BY CHAIN)"""
+# stringed_exclude_list = ", ".join(exclude_list)
+# stringed_exclude_list = exclude_list[0]
+DB.execute(query)
+rows = DB.fetchall()
+for row in rows:
+	B_W_Dict["Best"][row[2]] = {}
+	B_W_Dict["Best"][row[2]]["eanid"] = row[1]
+	# exclude_list.append(row[1])
+	exclude_list.append(str(row[1]))
+	B_W_Dict["Best"][row[2]]["cpp"] = row[6]
+	B_W_Dict["Best"][row[2]]["regionid"] = row[3]
+	B_W_Dict["Best"][row[2]]["checkin"] = "5/10/2014"
+	B_W_Dict["Best"][row[2]]["checkout"] = "5/12/2014"
+	r = evaluator.request_single_hotel_no_dates(row[1])
+	print r
+	r = r["HotelListResponse"]["HotelList"]["HotelSummary"]
+	B_W_Dict["Best"][row[2]]["city"] = r["city"]
+	B_W_Dict["Best"][row[2]]["tripAdvisorRatingUrl"] = r["tripAdvisorRatingUrl"]
+	B_W_Dict["Best"][row[2]]["name"] = r["name"]
+	photo = r["thumbNailUrl"]
+	photo = evaluator.fullsize_image(photo)
+	B_W_Dict["Best"][row[2]]["photo"] = photo	
+
+B_W_Dict["SecondBest"] = {}
+query = """SELECT * FROM CPP_VALUES WHERE CentsPerPoint IN (select MAX(CentsPerPoint) FROM CPP_Values WHERE EANHotelID NOT IN (%s) GROUP BY CHAIN)"""
+stringed_exclude_list = ", ".join(exclude_list)
+DB.execute(query, (stringed_exclude_list,))
+rows = DB.fetchall()
+for row in rows:
+	B_W_Dict["SecondBest"][row[2]] = {}
+	B_W_Dict["SecondBest"][row[2]]["eanid"] = row[1]
+	exclude_list.append(str(row[1]))
+	B_W_Dict["SecondBest"][row[2]]["cpp"] = row[6]
+	B_W_Dict["SecondBest"][row[2]]["regionid"] = row[3]
+	B_W_Dict["SecondBest"][row[2]]["checkin"] = "5/10/2014"
+	B_W_Dict["SecondBest"][row[2]]["checkout"] = "5/12/2014"
+	r = evaluator.request_single_hotel_no_dates(row[1])
+	print r
+	r = r["HotelListResponse"]["HotelList"]["HotelSummary"]
+	B_W_Dict["SecondBest"][row[2]]["city"] = r["city"]
+	B_W_Dict["SecondBest"][row[2]]["tripAdvisorRatingUrl"] = r["tripAdvisorRatingUrl"]
+	B_W_Dict["SecondBest"][row[2]]["name"] = r["name"]
+	photo = r["thumbNailUrl"]
+	photo = evaluator.fullsize_image(photo)
+	B_W_Dict["SecondBest"][row[2]]["photo"] = photo	
+
+B_W_Dict["ThirdBest"] = {}
+query = """SELECT * FROM CPP_VALUES WHERE CentsPerPoint IN (select MAX(CentsPerPoint) FROM CPP_Values WHERE EANHotelID NOT IN (%s) GROUP BY CHAIN)"""
+stringed_exclude_list = ", ".join(exclude_list)
+DB.execute(query, (stringed_exclude_list,))
+rows = DB.fetchall()
+for row in rows:
+	B_W_Dict["ThirdBest"][row[2]] = {}
+	B_W_Dict["ThirdBest"][row[2]]["eanid"] = row[1]
+	exclude_list.append(str(row[1]))
+	B_W_Dict["ThirdBest"][row[2]]["cpp"] = row[6]
+	B_W_Dict["ThirdBest"][row[2]]["regionid"] = row[3]
+	B_W_Dict["ThirdBest"][row[2]]["checkin"] = "5/10/2014"
+	B_W_Dict["ThirdBest"][row[2]]["checkout"] = "5/12/2014"
+	r = evaluator.request_single_hotel_no_dates(row[1])
+	print r
+	r = r["HotelListResponse"]["HotelList"]["HotelSummary"]
+	B_W_Dict["ThirdBest"][row[2]]["city"] = r["city"]
+	B_W_Dict["ThirdBest"][row[2]]["tripAdvisorRatingUrl"] = r["tripAdvisorRatingUrl"]
+	B_W_Dict["ThirdBest"][row[2]]["name"] = r["name"]
+	photo = r["thumbNailUrl"]
+	photo = evaluator.fullsize_image(photo)
+	B_W_Dict["ThirdBest"][row[2]]["photo"] = photo	
+
+
+
+
+B_W_Dict["Worst"] = {}
+query = """SELECT * FROM CPP_VALUES WHERE CentsPerPoint IN (select MIN(CentsPerPoint) FROM CPP_Values GROUP BY CHAIN)"""
+DB.execute(query)
+rows = DB.fetchall()
+for row in rows:
+	B_W_Dict["Worst"][row[2]] = {}
+	B_W_Dict["Worst"][row[2]]["eanid"] = row[1]
+	exclude_list.append(str(row[1]))
+	B_W_Dict["Worst"][row[2]]["cpp"] = row[6]
+	B_W_Dict["Worst"][row[2]]["regionid"] = row[3]
+	# B_W_Dict["Worst"][row[2]]["checkin"] = row[4]
+	# B_W_Dict["Worst"][row[2]]["checkout"] = row[5]
+	B_W_Dict["Worst"][row[2]]["checkin"] = "5/10/2014"
+	B_W_Dict["Worst"][row[2]]["checkout"] = "5/12/2014"
+	r = evaluator.request_single_hotel_no_dates(row[1])
+	print r
+	r = r["HotelListResponse"]["HotelList"]["HotelSummary"]
+	B_W_Dict["Worst"][row[2]]["city"] = r["city"]
+	B_W_Dict["Worst"][row[2]]["tripAdvisorRatingUrl"] = r["tripAdvisorRatingUrl"]
+	B_W_Dict["Worst"][row[2]]["name"] = r["name"]
+	photo = r["thumbNailUrl"]
+	photo = evaluator.fullsize_image(photo)
+	B_W_Dict["Worst"][row[2]]["photo"] = photo	
+
+B_W_Dict["SecondWorst"] = {}
+query = """SELECT * FROM CPP_VALUES WHERE CentsPerPoint IN (select MIN(CentsPerPoint) FROM CPP_Values WHERE EANHotelID NOT IN (%s)GROUP BY CHAIN)"""
+stringed_exclude_list = ", ".join(exclude_list)
+DB.execute(query, (stringed_exclude_list,))
+rows = DB.fetchall()
+for row in rows:
+	B_W_Dict["SecondWorst"][row[2]] = {}
+	B_W_Dict["SecondWorst"][row[2]]["eanid"] = row[1]
+	exclude_list.append(str(row[1]))
+	B_W_Dict["SecondWorst"][row[2]]["cpp"] = row[6]
+	B_W_Dict["SecondWorst"][row[2]]["regionid"] = row[3]
+	# B_W_Dict["Worst"][row[2]]["checkin"] = row[4]
+	# B_W_Dict["Worst"][row[2]]["checkout"] = row[5]
+	B_W_Dict["SecondWorst"][row[2]]["checkin"] = "5/10/2014"
+	B_W_Dict["SecondWorst"][row[2]]["checkout"] = "5/12/2014"
+	r = evaluator.request_single_hotel_no_dates(row[1])
+	print r
+	r = r["HotelListResponse"]["HotelList"]["HotelSummary"]
+	B_W_Dict["SecondWorst"][row[2]]["city"] = r["city"]
+	B_W_Dict["SecondWorst"][row[2]]["tripAdvisorRatingUrl"] = r["tripAdvisorRatingUrl"]
+	B_W_Dict["SecondWorst"][row[2]]["name"] = r["name"]
+	photo = r["thumbNailUrl"]
+	photo = evaluator.fullsize_image(photo)
+	B_W_Dict["SecondWorst"][row[2]]["photo"] = photo	
+
+
+B_W_Dict["ThirdWorst"] = {}
+query = """SELECT * FROM CPP_VALUES WHERE CentsPerPoint IN (select MIN(CentsPerPoint) FROM CPP_Values WHERE EANHotelID NOT IN (%s)GROUP BY CHAIN)"""
+stringed_exclude_list = ", ".join(exclude_list)
+DB.execute(query, (stringed_exclude_list,))
+rows = DB.fetchall()
+for row in rows:
+	B_W_Dict["ThirdWorst"][row[2]] = {}
+	B_W_Dict["ThirdWorst"][row[2]]["eanid"] = row[1]
+	exclude_list.append(str(row[1]))
+	B_W_Dict["ThirdWorst"][row[2]]["cpp"] = row[6]
+	B_W_Dict["ThirdWorst"][row[2]]["regionid"] = row[3]
+	# B_W_Dict["Worst"][row[2]]["checkin"] = row[4]
+	# B_W_Dict["Worst"][row[2]]["checkout"] = row[5]
+	B_W_Dict["ThirdWorst"][row[2]]["checkin"] = "5/10/2014"
+	B_W_Dict["ThirdWorst"][row[2]]["checkout"] = "5/12/2014"
+	r = evaluator.request_single_hotel_no_dates(row[1])
+	r = r["HotelListResponse"]["HotelList"]["HotelSummary"]
+	print r
+	B_W_Dict["ThirdWorst"][row[2]]["city"] = r["city"]
+	B_W_Dict["ThirdWorst"][row[2]]["tripAdvisorRatingUrl"] = r["tripAdvisorRatingUrl"]
+	B_W_Dict["ThirdWorst"][row[2]]["name"] = r["name"]
+	photo = r["thumbNailUrl"]
+	photo = evaluator.fullsize_image(photo)
+	B_W_Dict["ThirdWorst"][row[2]]["photo"] = photo	
+
+print B_W_Dict
+
+# j = open('bestandworst.json', 'w')
+
+# j.write(json.dumps(B_W_Dict))
+
+# Avg_CPP_Dict = {}
+# Avg_CPP_Dict = evaluator.find_average_cpp()
+
+# f = open("avgcpp.py", "w")
+
+# for key,value in Avg_CPP_Dict.iteritems():
+# 	line = key+"="+str(value)+"\n"
+# 	print line
+# 	f.write(line)
+
+# f.close()
+
