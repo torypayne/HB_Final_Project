@@ -188,6 +188,9 @@ def process_login():
 		flash("Username or password incorrect")
 		return redirect(url_for("login"))
 
+@app.route("/hotelpoints101")
+def show_hotel_categories():
+	return render_template("hotelpoints.html")
 
 # @app.route("/mypoints")
 # def show_points():

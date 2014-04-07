@@ -41,7 +41,7 @@
     <!--/.nav-collapse -->
         <div class="col-md-8"><div class="spacing"><form class="search form-inline" method="GET" action="{{url_for('point_search')}}"></div>
         <div class="col-md-4">
-        <select class="form-control form-inline nav-search" placeholder="Enter Your Points" name="pointsbrand" default="{{brand}}">
+        <select class="form-control form-inline nav-search" placeholder="Pick a Brand" name="pointsbrand" default="{{brand}}">
     <option>Pick a Brand</option>
     <option>Hilton</option>
     <option>Hyatt</option>
@@ -49,7 +49,7 @@
     <option>Starwood</option>
     </select></div>
     <div class="col-md-4">
-        <input type="text" class="form-control form-inline" placeholder="{{points}}" name="points" default="{{points}}"></div>
+        <input type="text" class="form-control form-inline" placeholder="Enter Your Points" name="points" default="{{points}}"></div>
         <div class="col-md-4">
         <input type="submit" class="btn btn-success" value="Compare" ></div>
     </form>
@@ -84,8 +84,8 @@
   TripAdvisor: <img src="{{hotel['tripAdvisorRatingUrl']}}">
   {% endif %}
   <br>
-  <a href="http://www.travelnow.com/templates/455248/hotels/{{hotel['hotelId']}}/overview?roomsCount=1&rooms[0].adultsCount=1&rooms[0].childrenCount=0&checkin={{checkin}}&checkout={{checkout}}&currency=USD&currencySymbol=%24&lang=en">More Information</a><br>
-  <a href='http://{{hotel["website"]|replace("http://","")}}'>{{hotel["program"]}} Website</a>
+  <a target="_blank" href="http://www.travelnow.com/templates/455248/hotels/{{hotel['hotelId']}}/overview?roomsCount=1&rooms[0].adultsCount=1&rooms[0].childrenCount=0&checkin={{checkin}}&checkout={{checkout}}&currency=USD&currencySymbol=%24&lang=en">More Information</a><br>
+  <a target="_blank" href='http://{{hotel["website"]|replace("http://","")}}'>{{hotel["program"]}} Website</a>
 </div>
 </div>
 </div>

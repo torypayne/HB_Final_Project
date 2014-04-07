@@ -105,8 +105,8 @@
 	<span class="label label-danger">Bad</span>
 	{% endif %}
 	<br>
-	<a href="http://www.travelnow.com/templates/455248/hotels/{{hotel['hotelId']}}/overview?roomsCount=1&rooms[0].adultsCount=1&rooms[0].childrenCount=0&checkin={{checkin}}&checkout={{checkout}}&currency=USD&currencySymbol=%24&lang=en">More Information</a><br>
-	<a href='http://{{hotel["website"]|replace("http://","")}}'>Book with {{hotel["program"]}}</a>
+	<a target="_blank" href="http://www.travelnow.com/templates/455248/hotels/{{hotel['hotelId']}}/overview?roomsCount=1&rooms[0].adultsCount=1&rooms[0].childrenCount=0&checkin={{checkin}}&checkout={{checkout}}&currency=USD&currencySymbol=%24&lang=en">More Information</a><br>
+	<a target="_blank" href='http://{{hotel["website"]|replace("http://","")}}'>Book with {{hotel["program"]}}</a>
 	</div>
 </div>
 </div>
