@@ -9,7 +9,7 @@ Resorio was primarily written in Python.  I've got Flask as my framework, MySQL 
 
 As encouraged by Hackbright, I used an Agile development methodology that included sprints, weekly goals and daily standups with my house.  Below, I'm going to wallk you through what I accomplished in each sprint and what I learned from it.  Due to my eagerness to work on the project, I spent parts of two weekends prior to the official project start making some building blocks.  I've included those as sprints below.
 
-Sprint 1 - Database fun!
+Sprint 1 - Database Fun!
 ============
 Weekend Following Hackbright Week 4
 
