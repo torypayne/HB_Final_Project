@@ -42,47 +42,47 @@ def search_data():
 
 @app.route("/catsearch")
 def cat_search():
-	# try:
-	brand = request.args.get("catbrand")
-	category = request.args.get("catnumber")
-	checkin = request.args.get("catcheckin")
-	checkout = request.args.get("catcheckout")
-	if request.args.get("page"):
-		page = request.args.get("page")
-	else:
-		page = 1
-	print page
-	# print brand
-	# print category
-	# print evaluator.search_cat(brand,category)
-	hotel_tuple = evaluator.search_cat(brand, category, page)
-	number_of_pages = evaluator.number_of_pages(brand, category)
-	number_of_pages = range(1,number_of_pages+1)
-	# print hotel_tuple
-	hotel_list = hotel_tuple[0]
-	hotel_dict = hotel_tuple[1]
-	expedia_list = evaluator.request_specific_hotels(hotel_list,checkin,checkout)
-	pretty_string =brand+" Category "+str(category)
-	CPP_dictionary = {"Hilton" : avgcpp.Hilton, 
-						"Hyatt" : avgcpp.Hyatt, 
-						"Marriott" : avgcpp.Marriott,
-						"Starwood" : avgcpp.Starwood}
-	r = expedia_list["HotelListResponse"]["HotelList"]["HotelSummary"]
-	r = evaluator.merge_data(r, hotel_dict)
-	print "Just tried to merge data"
-	# if evaluator.cpp_already_stored(region, checkin, checkout) == False:
-	# 	evaluator.store_cpp(r, region, checkin, checkout)
-	return render_template("catsearch.html", city=pretty_string,
-										brand=brand,
-										category=category, 
-										checkin=checkin, 
-										checkout=checkout, 
-										hotel_list=r,
-										CPP_dictionary=CPP_dictionary,
-										number_of_pages=number_of_pages)
-	# except:
-	# 	flash("Oh no! We couldn't find any hotels that matched your request! Double check your destination spelling and specificity, then try different dates.")
-	# 	return redirect(url_for("index"))
+	try:
+		brand = request.args.get("catbrand")
+		category = request.args.get("catnumber")
+		checkin = request.args.get("catcheckin")
+		checkout = request.args.get("catcheckout")
+		if request.args.get("page"):
+			page = request.args.get("page")
+		else:
+			page = 1
+		print page
+		# print brand
+		# print category
+		# print evaluator.search_cat(brand,category)
+		hotel_tuple = evaluator.search_cat(brand, category, page)
+		number_of_pages = evaluator.number_of_pages(brand, category)
+		number_of_pages = range(1,number_of_pages+1)
+		# print hotel_tuple
+		hotel_list = hotel_tuple[0]
+		hotel_dict = hotel_tuple[1]
+		expedia_list = evaluator.request_specific_hotels(hotel_list,checkin,checkout)
+		pretty_string =brand+" Category "+str(category)
+		CPP_dictionary = {"Hilton" : avgcpp.Hilton, 
+							"Hyatt" : avgcpp.Hyatt, 
+							"Marriott" : avgcpp.Marriott,
+							"Starwood" : avgcpp.Starwood}
+		r = expedia_list["HotelListResponse"]["HotelList"]["HotelSummary"]
+		r = evaluator.merge_data(r, hotel_dict)
+		# print "Just tried to merge data"
+		# if evaluator.cpp_already_stored(region, checkin, checkout) == False:
+		# 	evaluator.store_cpp(r, region, checkin, checkout)
+		return render_template("catsearch.html", city=pretty_string,
+											brand=brand,
+											category=category, 
+											checkin=checkin, 
+											checkout=checkout, 
+											hotel_list=r,
+											CPP_dictionary=CPP_dictionary,
+											number_of_pages=number_of_pages)
+	except:
+		flash("Oh no! We couldn't find any hotels that matched your request! Double check your destination spelling and specificity, then try different dates.")
+		return redirect(url_for("index"))
 
 @app.route("/search")
 def search_results():
