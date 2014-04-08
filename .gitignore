@@ -8,6 +8,10 @@ __pycache__/
 ngrok
 templates/temppage.html
 
+Pre_move_files/env/*
+Pre_move_files/ngrok
+Pre_move_files/ngrok.zip
+
 # Distribution / packaging
 .Python
 env/
