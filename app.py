@@ -2,14 +2,13 @@ from flask import Flask, render_template, redirect, request, url_for, flash, ses
 import requests
 import json
 from pprint import pprint
-import evaluator
+import evaluator 
 import avgcpp
 import config
 
 
 app = Flask(__name__)
 app.secret_key = "tempsecret"
-# app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://b64cd4ed64d781:eb2052db@us-cdbr-east-05.cleardb.net/heroku_ff4277368662e82?reconnect=true"
 hotel_points_dictionary = {"Hyatt" : [5000,8000,12000,15000,20000,25000,30000], 
 							"Starwood" : [3000,4000,7000,10000,12000,20000,30000], 
 							"Hilton" : [5000, 10000, 20000, 20000, 30000, 30000, 30000, 40000, 50000, 70000], 

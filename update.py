@@ -25,7 +25,7 @@ for row in rows:
 	B_W_Dict["Best"][row[2]]["regionid"] = row[3]
 	B_W_Dict["Best"][row[2]]["checkin"] = row[4]
 	B_W_Dict["Best"][row[2]]["checkout"] = row[5]
-	r = evaluator.request_single_hotel(row[1], row[4], row[5])
+	r = evaluator.request_single_hotel_no_dates(row[1])
 	r = r["HotelListResponse"]["HotelList"]["HotelSummary"]
 	B_W_Dict["Best"][row[2]]["city"] = r["city"]
 	B_W_Dict["Best"][row[2]]["tripAdvisorRatingUrl"] = r["tripAdvisorRatingUrl"]
@@ -48,7 +48,7 @@ for row in rows:
 	# B_W_Dict["Worst"][row[2]]["checkout"] = row[5]
 	B_W_Dict["Worst"][row[2]]["checkin"] = "5/10/2014"
 	B_W_Dict["Worst"][row[2]]["checkout"] = "5/12/2014"
-	r = evaluator.request_single_hotel(row[1], "5/10/2014", "5/12/2014")
+	r = evaluator.request_single_hotel_no_dates(row[1])
 	r = r["HotelListResponse"]["HotelList"]["HotelSummary"]
 	B_W_Dict["Worst"][row[2]]["city"] = r["city"]
 	B_W_Dict["Worst"][row[2]]["tripAdvisorRatingUrl"] = r["tripAdvisorRatingUrl"]
@@ -56,8 +56,8 @@ for row in rows:
 	photo = r["thumbNailUrl"]
 	photo = evaluator.fullsize_image(photo)
 	B_W_Dict["Worst"][row[2]]["photo"] = photo	
+	print B_W_Dict
 
-print B_W_Dict
 
 j = open('bestandworst.json', 'w')
 
