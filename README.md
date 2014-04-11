@@ -1,7 +1,7 @@
 Hackbright Final Project
 ============
 
-Resorio is my Hackbright Academy Final Project.  I'll be demoing on Career Day on April 8th.  Resorio is deployed via Heroku and is available for viewing at resor.io or resorio.herokuapp.com.  
+Resorio is my Hackbright Academy Final Project.  I'll be demoing on Career Day on April 8th.  Resorio is deployed via Heroku and is available for viewing at http://resor.io or http://resorio.herokuapp.com.  
 
 One of my favorite activities is travel, and one of the things I pride myself on is both earning and using points well.  Doing so at present requires a lot of manual research, so I sought to create a product that would make comparison shopping how to spend your hotel points a little bit easier.  My application lets you easily see how much the point cost of hotels across chains compares in a single city, as well as lets you explore redemption options for a given amount of points and look at hotels in a category.  One of the biggest value adds of my application is the relational data provided on how redemptions you're reviewing compare to the average options for that brand.  The brands supported by Resorio are Starwood, Hilton, Hyatt, and Marriott.  I will probably plan on adding in Club Carlson and Priority Club (Intercontinental Hotel Group) at some point in the future.
 
