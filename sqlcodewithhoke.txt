@@ -33,6 +33,7 @@ ORDER BY (data_length + index_length) DESC;
 
 mysqldump -u root -p hotelchains CuratedHotels CPP_Values Users RegionCodes > hotels.sql
 
+#TODO rename tables
 
 CuratedHotels
 CPP_Values
