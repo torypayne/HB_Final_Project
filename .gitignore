@@ -11,6 +11,7 @@ templates/temppage.html
 Pre_move_files/env/*
 Pre_move_files/ngrok
 Pre_move_files/ngrok.zip
+Pre_move_files/ean-pc-dbscripts
 
 # Distribution / packaging
 .Python
